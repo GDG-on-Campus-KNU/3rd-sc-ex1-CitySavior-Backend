@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ReportsController {
 
     @PostMapping("/reports")
-    public int reports(@RequestPart List<MultipartFile> imgFiles,
+    public int report(@RequestPart List<MultipartFile> imgFiles,
                        @RequestPart ReportRequestDto requestDto) {
 
         //TODO: 2024-01-18 신고 아이디 값 반환하도록 수정
