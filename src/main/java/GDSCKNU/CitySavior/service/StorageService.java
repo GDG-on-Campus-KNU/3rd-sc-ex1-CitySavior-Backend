@@ -1,9 +1,9 @@
 package GDSCKNU.CitySavior.service;
 
-import java.util.List;
+import java.io.IOException;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface StorageService {
 
-    public String saveFile(String fileName, List<MultipartFile> imgFiles);
+    public void saveFile(MultipartFile imgFiles);
 }
