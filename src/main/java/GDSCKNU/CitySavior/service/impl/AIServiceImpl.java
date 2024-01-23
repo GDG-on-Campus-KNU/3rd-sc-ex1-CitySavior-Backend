@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class AIServiceImpl implements AIService {
 
     @Override
-    public int evaluateDamageRate(List<MultipartFile> imgFiles) {
+    public int evaluateDamageRate(MultipartFile imgFiles) {
         return 0;
     }
 }

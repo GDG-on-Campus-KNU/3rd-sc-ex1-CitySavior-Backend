@@ -1,6 +1,8 @@
 package GDSCKNU.CitySavior.controller;
 
 import GDSCKNU.CitySavior.dto.ReportRequestDto;
+import GDSCKNU.CitySavior.service.AIService;
+import GDSCKNU.CitySavior.service.ReportService;
 import GDSCKNU.CitySavior.service.StorageService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -17,14 +19,15 @@ import org.springframework.web.multipart.MultipartFile;
 public class ReportsController {
 
     private final StorageService storageService;
+    private final AIService aiService;
+    private final ReportService reportService;
 
     @PostMapping("/reports")
-    public int report(@RequestPart(name = "imgFiles") MultipartFile imgFiles,
-                       @RequestPart(name = "requestDto") ReportRequestDto requestDto) {
+    public Long report(@RequestPart(name = "imgFiles") MultipartFile imgFiles,
+                      @RequestPart(name = "requestDto") ReportRequestDto requestDto) {
 
         String fileName = storageService.saveFile(imgFiles);
-
-        //TODO: 2024-01-18 신고 아이디 값 반환하도록 수정
-        return 0;
+        int damageRate = aiService.evaluateDamageRate(imgFiles);
+        return reportService.saveReport(requestDto, damageRate, fileName);
     }
 }

@@ -1,8 +1,8 @@
 package GDSCKNU.CitySavior.service;
 
-import GDSCKNU.CitySavior.entity.Report;
+import GDSCKNU.CitySavior.dto.ReportRequestDto;
 
 public interface ReportService {
 
-    public int saveReport(Report report);
+    public Long saveReport(ReportRequestDto requestDto, double weight, String img_url);
 }
