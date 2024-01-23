@@ -20,7 +20,7 @@ public class StorageServiceImpl implements StorageService {
     private final Storage storage;
 
     @Override
-    public void saveFile(MultipartFile imgFiles) {
+    public String saveFile(MultipartFile imgFiles) {
         String fileName = makeUUIDFileName();
         String fileContentType = imgFiles.getContentType();
 
@@ -31,6 +31,8 @@ public class StorageServiceImpl implements StorageService {
                             .build(),
                     imgFiles.getInputStream()
             );
+
+            return fileName;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

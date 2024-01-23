@@ -5,5 +5,5 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface StorageService {
 
-    public void saveFile(MultipartFile imgFiles);
+    public String saveFile(MultipartFile imgFiles);
 }
