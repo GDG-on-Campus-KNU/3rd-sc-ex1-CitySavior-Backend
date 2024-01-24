@@ -1,6 +1,8 @@
 package GDSCKNU.CitySavior.domain;
 
 
+import java.lang.annotation.Annotation;
+
 public enum Category {
     ROAD_TRAFFIC("도로 및 교통"),
     BUILD_STRUCTURE("건물 및 구조물"),
@@ -29,4 +31,5 @@ public enum Category {
     public String getKorean() {
         return korean;
     }
+
 }
