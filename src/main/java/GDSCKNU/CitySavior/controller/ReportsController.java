@@ -30,9 +30,6 @@ public class ReportsController {
 
         String fileName = storageService.saveFile(imgFiles);
         int damageRate = aiService.evaluateDamageRate(imgFiles);
-        //Todo: 신고 저장하는 로직 추가해야 함
-//        reportService.saveReport(requestDto, damageRate, fileName);
-
-        return 0L;
+        return reportService.saveReport(requestDto, damageRate, fileName);
     }
 }
