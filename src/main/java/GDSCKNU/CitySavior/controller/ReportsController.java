@@ -1,5 +1,6 @@
 package GDSCKNU.CitySavior.controller;
 
+import GDSCKNU.CitySavior.annotation.HasFile;
 import GDSCKNU.CitySavior.dto.ReportRequestDto;
 import GDSCKNU.CitySavior.service.AIService;
 import GDSCKNU.CitySavior.service.ReportService;
@@ -24,7 +25,7 @@ public class ReportsController {
     private final ReportService reportService;
 
     @PostMapping("/reports")
-    public Long report(@RequestPart(name = "imgFiles") MultipartFile imgFiles,
+    public Long report(@RequestPart(name = "imgFiles") @HasFile MultipartFile imgFiles,
                        @RequestPart(name = "requestDto") @Valid ReportRequestDto requestDto) {
 
         String fileName = storageService.saveFile(imgFiles);
