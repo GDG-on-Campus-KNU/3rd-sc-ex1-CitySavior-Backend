@@ -212,5 +212,9 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-
+## Json template
 *.json
+
+## Yaml template
+*.yml
+*.yaml
