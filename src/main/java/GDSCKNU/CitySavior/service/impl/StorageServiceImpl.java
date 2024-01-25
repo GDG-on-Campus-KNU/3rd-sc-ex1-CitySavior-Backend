@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor
 public class StorageServiceImpl implements StorageService {
 
-    @Value("${spring.cloud.gcp.bucket}")
+    @Value("${spring.cloud.gcp.storage.bucket}")
     private String bucketName;
 
     private final Storage storage;
