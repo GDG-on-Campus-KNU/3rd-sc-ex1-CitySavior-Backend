@@ -4,6 +4,7 @@ import GDSCKNU.CitySavior.dto.ReportRequestDto;
 import GDSCKNU.CitySavior.entity.Report;
 import GDSCKNU.CitySavior.repository.ReportRepository;
 import GDSCKNU.CitySavior.service.ReportService;
+import java.time.LocalDate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ public class ReportServiceImpl implements ReportService {
                 .description(requestDto.description())
                 .img_url(img_url)
                 .damage_ratio(requestDto.damageRatio())
+                .report_date(LocalDate.now())
                 .build();
 
         Report saveReport = reportRepository.save(report);
