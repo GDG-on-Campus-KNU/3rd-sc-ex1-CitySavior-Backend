@@ -7,6 +7,9 @@ import GDSCKNU.CitySavior.repository.ReportRepository;
 import GDSCKNU.CitySavior.service.ReportService;
 import java.time.LocalDate;
 import lombok.RequiredArgsConstructor;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Point;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -15,18 +18,19 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ReportServiceImpl implements ReportService {
 
-    private final ReportRepository reportRepository;
-    private final ModelMapper modelMapper;
     @Value("${spring.cloud.gcp.storage.url}")
     private String url;
+
+    private final ReportRepository reportRepository;
+    private final ModelMapper modelMapper;
+    private final GeometryFactory geometryFactory;
 
     @Override
     public Long saveReport(ReportRequestDto requestDto, double weight, String img_url) {
         Report report = Report.builder()
                 .weight(weight)
-                .latitude(requestDto.latitude())
-                .longitude(requestDto.longitude())
                 .description(requestDto.description())
+                .location(geometryFactory.createPoint(new Coordinate(requestDto.longitude(), requestDto.latitude())))
                 .img_url(img_url)
                 .damage_ratio(requestDto.damageRatio())
                 .report_date(LocalDate.now())
