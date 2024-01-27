@@ -30,7 +30,6 @@ public class Report {
     private Point location;
     private String description;
     private String img_url;
-    private double damage_ratio;
     private LocalDate repaired_date;
     private LocalDate report_date;
     @OneToMany(mappedBy = "report")

@@ -32,7 +32,6 @@ public class ReportServiceImpl implements ReportService {
                 .description(requestDto.description())
                 .location(geometryFactory.createPoint(new Coordinate(requestDto.longitude(), requestDto.latitude())))
                 .img_url(img_url)
-                .damage_ratio(requestDto.damageRatio())
                 .report_date(LocalDate.now())
                 .build();
 

@@ -31,8 +31,7 @@ class CategoryValidatorTest {
                 12.123,
                 12.123,
                 "testDescription",
-                "invalidCategory",
-                5);
+                "invalidCategory");
 
         //when
         Set<ConstraintViolation<ReportRequestDto>> violations = validator.validate(reportRequestDto);

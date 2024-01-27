@@ -29,7 +29,7 @@ class ReportsControllerTest {
     @DisplayName("파일과 함께 신고에 대한 정보를 받아들였을때 신고가 성공적으로 이루어지는지 확인")
     void 신고하기_정상시나리오() throws Exception {
         //given
-        ReportRequestDto testDescription = new ReportRequestDto(37.123456, 127.123456, "testDescription", "WATER", 1);
+        ReportRequestDto testDescription = new ReportRequestDto(37.123456, 127.123456, "testDescription", "WATER");
 
         MockMultipartFile imgFiles = new MockMultipartFile(
                 "imgFiles",
