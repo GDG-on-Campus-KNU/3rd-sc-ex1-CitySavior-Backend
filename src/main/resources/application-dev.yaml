@@ -16,4 +16,3 @@ spring:
         time_zone: Asia/Seoul
       format_sql: true
     database: postgresql
-#    database-platform: org.hibernate.dialect.PostgreSQLDialect

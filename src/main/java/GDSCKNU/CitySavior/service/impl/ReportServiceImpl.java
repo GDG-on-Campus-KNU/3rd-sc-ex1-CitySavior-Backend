@@ -6,6 +6,7 @@ import GDSCKNU.CitySavior.dto.ReportRequestDto;
 import GDSCKNU.CitySavior.entity.Report;
 import GDSCKNU.CitySavior.repository.ReportRepository;
 import GDSCKNU.CitySavior.service.ReportService;
+import jakarta.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -63,5 +64,14 @@ public class ReportServiceImpl implements ReportService {
                         new Coordinate(longitude, latitude)), 1000.0);
 
         return Map.of("reports", conversionService.convert(reportsWithinRadius, List.class));
+    }
+
+    @Override
+    @Transactional
+    public void endReport(Long reportId) {
+        Report findReport = reportRepository.findById(reportId)
+                .orElseThrow(() -> new IllegalArgumentException("해당하는 신고가 없습니다."));
+
+        findReport.endReport();
     }
 }

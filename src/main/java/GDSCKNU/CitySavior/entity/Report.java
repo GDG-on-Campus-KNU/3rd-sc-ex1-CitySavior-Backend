@@ -39,4 +39,8 @@ public class Report {
     private LocalDate report_date;
     @OneToMany(mappedBy = "report")
     private List<ReportComment> comments;
+
+    public void endReport() {
+        this.repaired_date = LocalDate.now();
+    }
 }
