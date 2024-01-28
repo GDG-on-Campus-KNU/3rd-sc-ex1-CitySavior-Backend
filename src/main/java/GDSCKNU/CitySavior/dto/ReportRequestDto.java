@@ -18,9 +18,7 @@ public record ReportRequestDto(
         String description,
 
         @CategoryCheck(enumClass = Category.class)
-        String category,
+        String category
 
-        @NotNull(message = "값을 입력해주세요.")
-        @PositiveOrZero(message = "0이상의 값을 입력해주세요.")
-        int damageRatio) {
+        ) {
 }

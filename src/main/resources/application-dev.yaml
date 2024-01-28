@@ -1,0 +1,19 @@
+spring:
+
+  datasource:
+    url: jdbc:postgresql://34.64.74.170:5432/citysavior
+    username: postgres
+    password: citysaviorDB
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        show_sql: false
+      jdbc:
+        time_zone: Asia/Seoul
+      format_sql: true
+    database: postgresql
+#    database-platform: org.hibernate.dialect.PostgreSQLDialect

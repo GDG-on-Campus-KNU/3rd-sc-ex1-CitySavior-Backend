@@ -4,4 +4,6 @@ spring:
 
   cloud:
     gcp:
-      bucket: city-savior-storage
+      storage:
+        bucket: city-savior-storage
+        url: https://storage.googleapis.com/city-savior-storage/
