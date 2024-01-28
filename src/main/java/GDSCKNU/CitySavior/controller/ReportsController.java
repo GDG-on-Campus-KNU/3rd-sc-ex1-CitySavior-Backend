@@ -1,6 +1,7 @@
 package GDSCKNU.CitySavior.controller;
 
 import GDSCKNU.CitySavior.annotation.HasFile;
+import GDSCKNU.CitySavior.dto.MapReportsResponseDto;
 import GDSCKNU.CitySavior.dto.ReportDetailResponseDto;
 import GDSCKNU.CitySavior.dto.ReportRequestDto;
 import GDSCKNU.CitySavior.service.AIService;
@@ -8,13 +9,14 @@ import GDSCKNU.CitySavior.service.ReportService;
 import GDSCKNU.CitySavior.service.StorageService;
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -41,5 +43,11 @@ public class ReportsController {
     @GetMapping("/reports/{report_id}")
     public ReportDetailResponseDto reportDetail(@PathVariable("report_id") Long reportId) {
         return reportService.getReportDetail(reportId);
+    }
+
+    @GetMapping("/reports")
+    public Map<String, List<MapReportsResponseDto>> getReportsByGIS(@RequestParam(name = "latitude") double latitude,
+                                                                    @RequestParam(name = "longitude") double longitude) {
+        return reportService.getReportsByGIS(latitude, longitude);
     }
 }

@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.locationtech.jts.geom.*;
 
 @Configuration
-public class LocationConfig {
+public class GISConfig {
 
     @Bean
     public GeometryFactory createFactory() {

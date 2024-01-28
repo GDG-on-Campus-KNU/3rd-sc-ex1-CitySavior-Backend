@@ -44,7 +44,7 @@ class ReportsControllerTest {
         MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
         //then
-        mockMvc.perform(multipart("/reports")
+        mockMvc.perform(multipart("/v1/reports")
                         .file(imgFiles)
                         .file(requestDto))
                 .andExpect(status().isOk());

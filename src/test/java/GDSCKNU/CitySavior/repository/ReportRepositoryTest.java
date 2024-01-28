@@ -2,6 +2,7 @@ package GDSCKNU.CitySavior.repository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import GDSCKNU.CitySavior.domain.Category;
 import GDSCKNU.CitySavior.entity.Report;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ class ReportRepositoryTest {
                 .repaired_date(null)
                 .report_date(LocalDate.now())
                 .comments(new ArrayList<>())
+                .category(Category.AIR_QUALITY)
                 .build();
 
         Report dummyReport2 = Report.builder()
@@ -44,6 +46,7 @@ class ReportRepositoryTest {
                 .img_url("test")
                 .repaired_date(null)
                 .report_date(LocalDate.now())
+                .category(Category.BUILD_STRUCTURE)
                 .comments(new ArrayList<>())
                 .build();
 
@@ -51,11 +54,14 @@ class ReportRepositoryTest {
 
         //when
         reportRepository.saveAll(List.of(dummyReport1, dummyReport2));
-        System.out.printf("dummyReport1: %s\n", dummyReport1.getReport_id());
-
-        List<Report> reports = reportRepository.findReportsWithinRadius(point, 1000.0);
+        List<Report> reportsWithinRadiusTest = reportRepository.findReportsWithinRadius(point,
+                1000.0);
 
         //then
-        assertEquals(1, reports.size());
+        assertEquals(1, reportsWithinRadiusTest.size());
+        for (Report report : reportsWithinRadiusTest) {
+            System.out.printf("latitude: %f, longitude: %f\n", report.getLocation().getX(),
+                    report.getLocation().getY());
+        }
     }
 }
