@@ -215,6 +215,10 @@ Temporary Items
 ## Json template
 *.json
 
+## Yaml
+src/main/resources/application-dev.yaml
+src/main/resources/application-local.yaml
+
 ## Yaml template
 *.yml
 *.yaml
