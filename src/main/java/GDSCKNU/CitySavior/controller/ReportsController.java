@@ -1,6 +1,7 @@
 package GDSCKNU.CitySavior.controller;
 
 import GDSCKNU.CitySavior.annotation.HasFile;
+import GDSCKNU.CitySavior.dto.CreateReportCommentRequestDto;
 import GDSCKNU.CitySavior.dto.MapReportsResponseDto;
 import GDSCKNU.CitySavior.dto.ReportDetailResponseDto;
 import GDSCKNU.CitySavior.dto.ReportRequestDto;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -32,15 +34,6 @@ public class ReportsController {
     private final AIService aiService;
     private final ReportService reportService;
 
-    @PostMapping("/reports")
-    public Long report(@RequestPart(name = "imgFiles") @HasFile MultipartFile imgFiles,
-                       @RequestPart(name = "requestDto") @Valid ReportRequestDto requestDto) {
-
-        String fileName = storageService.saveFile(imgFiles);
-        int damageRate = aiService.evaluateDamageRate(imgFiles);
-        return reportService.saveReport(requestDto, damageRate, fileName);
-    }
-
     @GetMapping("/reports/{report_id}")
     public ReportDetailResponseDto reportDetail(@PathVariable("report_id") Long reportId) {
         return reportService.getReportDetail(reportId);
@@ -50,6 +43,21 @@ public class ReportsController {
     public Map<String, List<MapReportsResponseDto>> getReportsByGIS(@RequestParam(name = "latitude") double latitude,
                                                                     @RequestParam(name = "longitude") double longitude) {
         return reportService.getReportsByGIS(latitude, longitude);
+    }
+
+    @PostMapping("/reports")
+    public Long report(@RequestPart(name = "imgFiles") @HasFile MultipartFile imgFiles,
+                       @RequestPart(name = "requestDto") @Valid ReportRequestDto requestDto) {
+
+        String fileName = storageService.saveFile(imgFiles);
+        int damageRate = aiService.evaluateDamageRate(imgFiles);
+        return reportService.saveReport(requestDto, damageRate, fileName);
+    }
+
+    @PostMapping("/reports/{report_id}/comment")
+    public Long comment(@PathVariable("report_id") Long reportId,
+                        @RequestBody CreateReportCommentRequestDto comment) {
+        return reportService.addComment(reportId, comment.comment());
     }
 
     @PatchMapping("/reports/{reportId}/end")

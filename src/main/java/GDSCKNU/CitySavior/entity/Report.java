@@ -43,4 +43,8 @@ public class Report {
     public void endReport() {
         this.repaired_date = LocalDate.now();
     }
+
+    public void addComment(ReportComment comment) {
+        this.comments.add(comment);
+    }
 }

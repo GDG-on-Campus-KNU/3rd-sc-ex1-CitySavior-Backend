@@ -15,4 +15,6 @@ public interface ReportService {
     Map<String, List<MapReportsResponseDto>> getReportsByGIS(double latitude, double longitude);
 
     void endReport(Long reportId);
+
+    Long addComment(Long reportId, String content);
 }
