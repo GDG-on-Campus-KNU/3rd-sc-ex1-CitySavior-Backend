@@ -1,6 +1,7 @@
 package GDSCKNU.CitySavior.global.jwt.provider;
 
 import GDSCKNU.CitySavior.dto.member.response.TokenResponse;
+import GDSCKNU.CitySavior.global.jwt.entity.NoPasswordAuthenticationToken;
 import GDSCKNU.CitySavior.global.jwt.exception.JwtException;
 import GDSCKNU.CitySavior.global.jwt.exception.error.JwtError;
 import GDSCKNU.CitySavior.global.redis.service.RedisService;
@@ -20,7 +21,6 @@ import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -82,7 +82,8 @@ public class JwtTokenProvider implements InitializingBean {
 
     public Authentication getAuthentication(String accessToken) {
         UserDetails userDetails = getUserDetailsFromToken(accessToken);
-        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+        return new NoPasswordAuthenticationToken(userDetails.getUsername(), null, userDetails.getAuthorities());
+        // userName == email
     }
 
     private UserDetails getUserDetailsFromToken(String accessToken) {
