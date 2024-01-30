@@ -1,8 +1,9 @@
 package GDSCKNU.CitySavior.service;
 
-import GDSCKNU.CitySavior.dto.MapReportsResponseDto;
-import GDSCKNU.CitySavior.dto.ReportDetailResponseDto;
-import GDSCKNU.CitySavior.dto.ReportRequestDto;
+import GDSCKNU.CitySavior.dto.response.MapReportsResponseDto;
+import GDSCKNU.CitySavior.dto.response.ReportDetailResponseDto;
+import GDSCKNU.CitySavior.dto.request.ReportRequestDto;
+import GDSCKNU.CitySavior.dto.response.StatisticsResponseDto;
 import java.util.List;
 import java.util.Map;
 
@@ -17,4 +18,6 @@ public interface ReportService {
     void endReport(Long reportId);
 
     Long addComment(Long reportId, String content);
+
+    StatisticsResponseDto getStatistics(double latitude, double longitude);
 }

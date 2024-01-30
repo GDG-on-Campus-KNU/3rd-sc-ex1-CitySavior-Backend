@@ -1,10 +1,11 @@
 package GDSCKNU.CitySavior.controller;
 
 import GDSCKNU.CitySavior.annotation.HasFile;
-import GDSCKNU.CitySavior.dto.CreateReportCommentRequestDto;
-import GDSCKNU.CitySavior.dto.MapReportsResponseDto;
-import GDSCKNU.CitySavior.dto.ReportDetailResponseDto;
-import GDSCKNU.CitySavior.dto.ReportRequestDto;
+import GDSCKNU.CitySavior.dto.request.CreateReportCommentRequestDto;
+import GDSCKNU.CitySavior.dto.response.MapReportsResponseDto;
+import GDSCKNU.CitySavior.dto.response.ReportDetailResponseDto;
+import GDSCKNU.CitySavior.dto.request.ReportRequestDto;
+import GDSCKNU.CitySavior.dto.response.StatisticsResponseDto;
 import GDSCKNU.CitySavior.service.AIService;
 import GDSCKNU.CitySavior.service.ReportService;
 import GDSCKNU.CitySavior.service.StorageService;
@@ -43,6 +44,13 @@ public class ReportsController {
     public Map<String, List<MapReportsResponseDto>> getReportsByGIS(@RequestParam(name = "latitude") double latitude,
                                                                     @RequestParam(name = "longitude") double longitude) {
         return reportService.getReportsByGIS(latitude, longitude);
+    }
+
+    @GetMapping("/reports/statistics")
+    public StatisticsResponseDto getStatistics(@PathVariable("latitude") double latitude,
+                                               @PathVariable("longitude") double longitude) {
+//        return reportService.getStatistics();
+        return null;
     }
 
     @PostMapping("/reports")

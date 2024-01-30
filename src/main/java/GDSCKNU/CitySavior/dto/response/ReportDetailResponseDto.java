@@ -1,4 +1,4 @@
-package GDSCKNU.CitySavior.dto;
+package GDSCKNU.CitySavior.dto.response;
 
 import java.time.LocalDate;
 import java.util.List;

@@ -1,6 +1,6 @@
 package GDSCKNU.CitySavior.converter;
 
-import GDSCKNU.CitySavior.dto.ReportDetailResponseDto;
+import GDSCKNU.CitySavior.dto.response.ReportDetailResponseDto;
 import GDSCKNU.CitySavior.entity.Report;
 import org.springframework.core.convert.converter.Converter;
 

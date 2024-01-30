@@ -1,7 +1,9 @@
-package GDSCKNU.CitySavior.dto;
+package GDSCKNU.CitySavior.dto.response;
 
 import GDSCKNU.CitySavior.domain.Category;
+import lombok.Builder;
 
+@Builder
 public record MapReportsResponseDto(
         Long reportId,
         double latitude,

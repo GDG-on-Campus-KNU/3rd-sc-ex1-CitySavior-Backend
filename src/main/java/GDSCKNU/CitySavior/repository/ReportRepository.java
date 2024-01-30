@@ -17,6 +17,6 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
     @Query(value = "SELECT * FROM Report r " +
             "WHERE ST_DWithin(r.location, :point, :radius, false) = true", nativeQuery = true)
     List<Report> findReportsWithinRadius(@Param("point") Point point,
-                                             @Param("radius") double radius);
+                                         @Param("radius") double radius);
 
 }

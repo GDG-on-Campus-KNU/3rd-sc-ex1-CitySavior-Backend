@@ -4,7 +4,7 @@ package GDSCKNU.CitySavior.controller;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import GDSCKNU.CitySavior.dto.ReportRequestDto;
+import GDSCKNU.CitySavior.dto.request.ReportRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.FileInputStream;
 import org.junit.jupiter.api.DisplayName;
