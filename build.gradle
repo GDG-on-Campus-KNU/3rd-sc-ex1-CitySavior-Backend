@@ -1,64 +1,64 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.2.1'
-	id 'io.spring.dependency-management' version '1.1.4'
+    id 'java'
+    id 'org.springframework.boot' version '3.2.1'
+    id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'GDSCKNU'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '17'
+    sourceCompatibility = '17'
 }
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
 
-	//Validation
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	//SpringBoot Web
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	//Lombok
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	//Test
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	//ModelMapper
-	implementation 'org.modelmapper:modelmapper:3.2.0'
-	//GCP Cloud Storage
-	implementation 'org.springframework.cloud:spring-cloud-gcp-core:1.2.8.RELEASE'
-	implementation 'org.springframework.cloud:spring-cloud-gcp-storage:1.2.8.RELEASE'
+    //Validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    //SpringBoot Web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    //Lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    //Test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    //ModelMapper
+    implementation 'org.modelmapper:modelmapper:3.2.0'
+    //GCP Cloud Storage
+    implementation 'org.springframework.cloud:spring-cloud-gcp-core:1.2.8.RELEASE'
+    implementation 'org.springframework.cloud:spring-cloud-gcp-storage:1.2.8.RELEASE'
 
-	// postgres
-	implementation 'org.postgresql:postgresql'
+    // postgres
+    implementation 'org.postgresql:postgresql'
 
-	// hibernate spatial
-	implementation 'org.hibernate.orm:hibernate-spatial:6.4.2.Final'
+    // hibernate spatial
+    implementation 'org.hibernate.orm:hibernate-spatial:6.4.2.Final'
 
-	//-------------------DataBase-------------------
-	//H2
-	runtimeOnly 'com.h2database:h2'
-	// postgres
-	implementation 'org.postgresql:postgresql'
-	// hibernate spatial
-	implementation 'org.hibernate.orm:hibernate-spatial:6.4.2.Final'
-	//Data JPA
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	//p6spy
-	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.1'
+    //-------------------DataBase-------------------
+    //H2
+    runtimeOnly 'com.h2database:h2'
+    // postgres
+    implementation 'org.postgresql:postgresql'
+    // hibernate spatial
+    implementation 'org.hibernate.orm:hibernate-spatial:6.4.2.Final'
+    //Data JPA
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    //p6spy
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.1'
 
 
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }

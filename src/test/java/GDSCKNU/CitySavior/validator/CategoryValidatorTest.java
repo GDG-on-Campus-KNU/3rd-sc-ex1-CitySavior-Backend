@@ -3,7 +3,7 @@ package GDSCKNU.CitySavior.validator;
 
 import static org.assertj.core.api.Assertions.*;
 
-import GDSCKNU.CitySavior.dto.ReportRequestDto;
+import GDSCKNU.CitySavior.dto.request.ReportRequestDto;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;

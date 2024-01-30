@@ -1,22 +1,20 @@
 package GDSCKNU.CitySavior.converter;
 
 
-import GDSCKNU.CitySavior.dto.MapReportsResponseDto;
+import GDSCKNU.CitySavior.dto.response.MapReportsResponseDto;
 import GDSCKNU.CitySavior.entity.Report;
-import java.util.List;
 import org.springframework.core.convert.converter.Converter;
 
-public class MapReportsToDtoConverter implements Converter<List<Report>, List<MapReportsResponseDto>> {
+public class MapReportsToDtoConverter implements Converter<Report, MapReportsResponseDto> {
 
     @Override
-    public List<MapReportsResponseDto> convert(List<Report> reports) {
-        return reports.stream()
-                .map(report -> new MapReportsResponseDto(
-                        report.getReport_id(),
-                        report.getLocation().getX(),
-                        report.getLocation().getY(),
-                        report.getCategory(),
-                        report.getWeight()))
-                .toList();
+    public MapReportsResponseDto convert(Report reports) {
+        return MapReportsResponseDto.builder()
+                .reportId(reports.getReport_id())
+                .latitude(reports.getLocation().getX())
+                .longitude(reports.getLocation().getY())
+                .category(reports.getCategory())
+                .weight(reports.getWeight())
+                .build();
     }
 }

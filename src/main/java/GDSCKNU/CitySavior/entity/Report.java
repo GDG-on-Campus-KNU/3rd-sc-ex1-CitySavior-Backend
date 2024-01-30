@@ -39,4 +39,16 @@ public class Report {
     private LocalDate report_date;
     @OneToMany(mappedBy = "report")
     private List<ReportComment> comments;
+
+    public void endReport() {
+        this.repaired_date = LocalDate.now();
+    }
+
+    public void addComment(ReportComment comment) {
+        this.comments.add(comment);
+    }
+
+    public boolean isResolved() {
+        return this.repaired_date != null;
+    }
 }
