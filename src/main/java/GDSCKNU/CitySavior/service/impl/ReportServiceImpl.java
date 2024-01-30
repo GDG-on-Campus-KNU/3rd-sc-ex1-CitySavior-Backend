@@ -111,7 +111,6 @@ public class ReportServiceImpl implements ReportService {
         List<Report> reports = reportRepository.findReportsWithinRadius(
                 geometryFactory.createPoint(new Coordinate(longitude, latitude)), 1000.0);
 
-
-        return null;
+        return new StatisticsResponseDto(reports);
     }
 }

@@ -47,4 +47,8 @@ public class Report {
     public void addComment(ReportComment comment) {
         this.comments.add(comment);
     }
+
+    public boolean isResolved() {
+        return this.repaired_date != null;
+    }
 }

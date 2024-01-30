@@ -36,7 +36,7 @@ class ReportRepositoryTest {
                 .repaired_date(null)
                 .report_date(LocalDate.now())
                 .comments(new ArrayList<>())
-                .category(Category.AIR_QUALITY)
+                .category(Category.OTHER)
                 .build();
 
         Report dummyReport2 = Report.builder()

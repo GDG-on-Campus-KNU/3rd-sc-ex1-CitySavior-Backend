@@ -47,10 +47,9 @@ public class ReportsController {
     }
 
     @GetMapping("/reports/statistics")
-    public StatisticsResponseDto getStatistics(@PathVariable("latitude") double latitude,
-                                               @PathVariable("longitude") double longitude) {
-//        return reportService.getStatistics();
-        return null;
+    public StatisticsResponseDto getStatistics(@RequestParam("latitude") double latitude,
+                                               @RequestParam("longitude") double longitude) {
+        return reportService.getStatistics(latitude, longitude);
     }
 
     @PostMapping("/reports")
