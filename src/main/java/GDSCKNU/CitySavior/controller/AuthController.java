@@ -54,9 +54,8 @@ public class AuthController {
     )
     @PostMapping("/login")
 
-    public ResponseAuth<ApiResponse<TokenResponse>> login(@RequestBody MemberLoginV1Request memberLoginV1Request) {
+    public ResponseEntity<ApiResponse<TokenResponse>> login(@RequestBody MemberLoginV1Request memberLoginV1Request) {
         TokenResponse tokenDto = authService.login(memberLoginV1Request);
-
         ResponseCookie responseCookie = setResponseCookie(tokenDto);
 
         return ResponseAuth.success(HttpStatus.OK, responseCookie, tokenDto.accessToken(),
@@ -72,7 +71,7 @@ public class AuthController {
         if (!authService.validate(requestAccessToken)) {
             return ResponseEntity.status(HttpStatus.OK).build();
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); // reissue 불 필요
         }
     }
 
@@ -81,8 +80,8 @@ public class AuthController {
             summary = "토큰 reissue 진행"
     )
     @PostMapping("/reissue")
-    public ResponseAuth<ApiResponse<String>> reissue(@CookieValue(name = "refresh-token") String requestRefreshToken,
-                                                     @RequestHeader("Authorization") String requestAccessToken) {
+    public ResponseEntity<ApiResponse<String>> reissue(@CookieValue(name = "refresh-token") String requestRefreshToken,
+                                                       @RequestHeader("Authorization") String requestAccessToken) {
         TokenResponse reissuedTokenDto = authService.reissue(requestAccessToken, requestRefreshToken);
 
         if (reissuedTokenDto != null) {
@@ -101,7 +100,7 @@ public class AuthController {
             summary = "로그아웃 진행"
     )
     @PostMapping("/logout")
-    public ResponseAuth<ApiResponse<Void>> logout(@RequestHeader("Authorization") String requestAccessToken) {
+    public ResponseEntity<ApiResponse<Void>> logout(@RequestHeader("Authorization") String requestAccessToken) {
         authService.logout(requestAccessToken);
 
         return ResponseAuth.logout(HttpStatus.OK, ApiResponse.success(AuthSuccessEnum.LOGOUT_APPLICATION_SUCCESS));
