@@ -2,6 +2,7 @@ package GDSCKNU.CitySavior.global.security.config;
 
 import GDSCKNU.CitySavior.global.jwt.filter.JwtAuthenticationEntryPoint;
 import GDSCKNU.CitySavior.global.jwt.filter.JwtAuthenticationFilter;
+import GDSCKNU.CitySavior.global.jwt.filter.NoPasswordAuthenticationFilter;
 import GDSCKNU.CitySavior.global.jwt.handler.JwtAccessDeniedHandler;
 import GDSCKNU.CitySavior.global.jwt.provider.JwtTokenProvider;
 import GDSCKNU.CitySavior.global.jwt.provider.NoPasswordAuthenticationProvider;
@@ -9,6 +10,7 @@ import GDSCKNU.CitySavior.service.member.detail.MemberDetailServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -20,6 +22,7 @@ import org.springframework.security.config.annotation.web.configurers.HeadersCon
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -43,8 +46,8 @@ public class SecurityConfig {
                         (authorizeHttpRequests) -> authorizeHttpRequests
                                 .requestMatchers("/v1/auth/login", "/v1/auth/signup").permitAll()
                                 .anyRequest().authenticated())
-
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
+                .addFilterBefore(noPasswordAuthenticationFilter(http), UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(new JwtAuthenticationFilter(jwtTokenProvider),
                         UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(
                         (sessionManagement) -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -73,4 +76,13 @@ public class SecurityConfig {
         return new NoPasswordAuthenticationProvider(memberDetailService);
     }
 
+    @Bean
+    public NoPasswordAuthenticationFilter noPasswordAuthenticationFilter(HttpSecurity http) throws Exception {
+        NoPasswordAuthenticationFilter noPasswordAuthenticationFilter = new NoPasswordAuthenticationFilter(
+                new AntPathRequestMatcher("/login", HttpMethod.POST.name()));
+
+        noPasswordAuthenticationFilter.setAuthenticationManager(authenticationManager(http));
+
+        return noPasswordAuthenticationFilter;
+    }
 }
