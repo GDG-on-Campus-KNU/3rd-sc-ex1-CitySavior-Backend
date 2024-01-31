@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: dev
+
+  cloud:
+    gcp:
+      storage:
+        bucket: city-savior-storage
+        url: https://storage.googleapis.com/city-savior-storage/

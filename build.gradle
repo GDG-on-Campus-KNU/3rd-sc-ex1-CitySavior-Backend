@@ -22,14 +22,45 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'com.mysql:mysql-connector-j'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+    // test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    
+    //Validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    //SpringBoot Web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    //Lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    //Test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    //ModelMapper
+    implementation 'org.modelmapper:modelmapper:3.2.0'
+    //GCP Cloud Storage
+    implementation 'org.springframework.cloud:spring-cloud-gcp-core:1.2.8.RELEASE'
+    implementation 'org.springframework.cloud:spring-cloud-gcp-storage:1.2.8.RELEASE'
+
+    // postgres
+    implementation 'org.postgresql:postgresql'
+
+    // hibernate spatial
+    implementation 'org.hibernate.orm:hibernate-spatial:6.4.2.Final'
+
+    //H2
+    runtimeOnly 'com.h2database:h2'
+    // postgres
+    implementation 'org.postgresql:postgresql'
+    // hibernate spatial
+    implementation 'org.hibernate.orm:hibernate-spatial:6.4.2.Final'
+    //Data JPA
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    //p6spy
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.1'
+    
+    
     // swagger
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
 
@@ -41,19 +72,11 @@ dependencies {
 
     // Spring security
     implementation 'org.springframework.boot:spring-boot-starter-security'
-
-    // postgreSql
-    implementation group: 'org.postgresql', name: 'postgresql', version: '42.6.0'
-
+    
     // jwt
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
-
-    // test
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'io.projectreactor:reactor-test'
-    testImplementation 'org.springframework.security:spring-security-test'
 }
 
 tasks.named('test') {
