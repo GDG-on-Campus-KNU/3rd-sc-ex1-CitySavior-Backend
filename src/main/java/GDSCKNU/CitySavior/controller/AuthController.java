@@ -67,8 +67,8 @@ public class AuthController {
             summary = "reissue가 필요한지 확인"
     )
     @PostMapping("/validate")
-    public ResponseEntity<?> validate(@RequestHeader("Authorization") String requestAccessToken) {
-        if (!authService.validate(requestAccessToken)) {
+    public ResponseEntity<?> validate(@RequestHeader("Authorization") String requestAccessTokenInHeader) {
+        if (!authService.validate(requestAccessTokenInHeader)) {
             return ResponseEntity.status(HttpStatus.OK).build();
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); // reissue 불 필요
@@ -81,8 +81,8 @@ public class AuthController {
     )
     @PostMapping("/reissue")
     public ResponseEntity<ApiResponse<String>> reissue(@CookieValue(name = "refresh-token") String requestRefreshToken,
-                                                       @RequestHeader("Authorization") String requestAccessToken) {
-        TokenResponse reissuedTokenDto = authService.reissue(requestAccessToken, requestRefreshToken);
+                                                       @RequestHeader("Authorization") String requestAccessTokenInHeader) {
+        TokenResponse reissuedTokenDto = authService.reissue(requestAccessTokenInHeader, requestRefreshToken);
 
         if (reissuedTokenDto != null) {
             ResponseCookie responseCookie = setResponseCookie(reissuedTokenDto);
@@ -100,8 +100,8 @@ public class AuthController {
             summary = "로그아웃 진행"
     )
     @PostMapping("/logout")
-    public ResponseEntity<ApiResponse<Void>> logout(@RequestHeader("Authorization") String requestAccessToken) {
-        authService.logout(requestAccessToken);
+    public ResponseEntity<ApiResponse<Void>> logout(@RequestHeader("Authorization") String requestAccessTokenInHeader) {
+        authService.logout(requestAccessTokenInHeader);
 
         return ResponseAuth.logout(HttpStatus.OK, ApiResponse.success(AuthSuccessEnum.LOGOUT_APPLICATION_SUCCESS));
     }
