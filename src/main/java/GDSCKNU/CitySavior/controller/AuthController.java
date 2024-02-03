@@ -3,8 +3,9 @@ package GDSCKNU.CitySavior.controller;
 import GDSCKNU.CitySavior.dto.member.request.MemberCreateV1Request;
 import GDSCKNU.CitySavior.dto.member.request.MemberLoginV1Request;
 import GDSCKNU.CitySavior.dto.member.response.TokenResponse;
+import GDSCKNU.CitySavior.dto.token.request.TokenReissueRequest;
 import GDSCKNU.CitySavior.exception.error.AuthError;
-import GDSCKNU.CitySavior.exception.success.AuthSuccessEnum;
+import GDSCKNU.CitySavior.exception.success.AuthSuccess;
 import GDSCKNU.CitySavior.global.response.model.ApiResponse;
 import GDSCKNU.CitySavior.global.util.ResponseAuth;
 import GDSCKNU.CitySavior.service.auth.AuthService;
@@ -14,10 +15,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -45,7 +44,7 @@ public class AuthController {
         memberService.registerMember(memberCreateV1Request);
         TokenResponse tokenDto = authService.join(memberCreateV1Request);
 
-        return ApiResponse.success(AuthSuccessEnum.JOIN_APPLICATION_AND_MAKE_TOKEN_SUCCESS, tokenDto);
+        return ApiResponse.success(AuthSuccess.JOIN_APPLICATION_AND_MAKE_TOKEN_SUCCESS, tokenDto);
     }
 
 
@@ -54,15 +53,13 @@ public class AuthController {
     )
     @PostMapping("/login")
 
-    public ResponseEntity<ApiResponse<TokenResponse>> login(@RequestBody MemberLoginV1Request memberLoginV1Request) {
+    public ApiResponse<TokenResponse> login(@RequestBody MemberLoginV1Request memberLoginV1Request) {
         TokenResponse tokenDto = authService.login(memberLoginV1Request);
-        ResponseCookie responseCookie = setResponseCookie(tokenDto);
 
-        return ResponseAuth.success(HttpStatus.OK, responseCookie, tokenDto.accessToken(),
-                ApiResponse.success(AuthSuccessEnum.LOGIN_APPLICATION_SUCCESS, tokenDto));
+        return ApiResponse.success(AuthSuccess.LOGIN_APPLICATION_SUCCESS, tokenDto);
     }
 
-
+    /*
     @Operation(
             summary = "reissue가 필요한지 확인"
     )
@@ -73,25 +70,24 @@ public class AuthController {
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); // reissue 불 필요
         }
-    }
+    }*/
 
 
     @Operation(
             summary = "토큰 reissue 진행"
     )
     @PostMapping("/reissue")
-    public ResponseEntity<ApiResponse<String>> reissue(@CookieValue(name = "refresh-token") String requestRefreshToken,
-                                                       @RequestHeader("Authorization") String requestAccessTokenInHeader) {
-        TokenResponse reissuedTokenDto = authService.reissue(requestAccessTokenInHeader, requestRefreshToken);
+    public ApiResponse<TokenResponse> reissue(
+            @RequestBody TokenReissueRequest tokenReissueRequest) {
+        TokenResponse reissuedTokenDto = authService.reissue(tokenReissueRequest.accessToken(),
+                tokenReissueRequest.refreshToken());
 
         if (reissuedTokenDto != null) {
-            ResponseCookie responseCookie = setResponseCookie(reissuedTokenDto);
 
-            return ResponseAuth.success(HttpStatus.OK, responseCookie, reissuedTokenDto.accessToken(),
-                    ApiResponse.success(AuthSuccessEnum.REISSUE_APPLICATION_SUCCESS, reissuedTokenDto.accessToken()));
+            return ApiResponse.success(AuthSuccess.REISSUE_APPLICATION_SUCCESS, reissuedTokenDto);
 
         } else {
-            return ResponseAuth.logout(HttpStatus.UNAUTHORIZED, ApiResponse.error(AuthError.TOKEN_NOT_FOUND_ERROR, ""));
+            return ApiResponse.error(AuthError.TOKEN_REISSUE_FAILED_ERROR, reissuedTokenDto);
         }
     }
 
@@ -103,15 +99,6 @@ public class AuthController {
     public ResponseEntity<ApiResponse<Void>> logout(@RequestHeader("Authorization") String requestAccessTokenInHeader) {
         authService.logout(requestAccessTokenInHeader);
 
-        return ResponseAuth.logout(HttpStatus.OK, ApiResponse.success(AuthSuccessEnum.LOGOUT_APPLICATION_SUCCESS));
-    }
-
-
-    private ResponseCookie setResponseCookie(TokenResponse tokenResponse) {
-        return ResponseCookie.from("refresh-token", tokenResponse.refreshToken())
-                .maxAge(COOKIE_EXPIRATION)
-                .httpOnly(true)
-                .secure(true)
-                .build();
+        return ResponseAuth.logout(HttpStatus.OK, ApiResponse.success(AuthSuccess.LOGOUT_APPLICATION_SUCCESS));
     }
 }

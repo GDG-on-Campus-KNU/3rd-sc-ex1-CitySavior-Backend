@@ -128,18 +128,6 @@ public class JwtTokenProvider implements InitializingBean {
         }
     }
 
-    public boolean validateAccessTokenAtExpired(String accessToken) {
-        try {
-            return getClaims(accessToken)
-                    .getExpiration()
-                    .before(new Date());
-        } catch (ExpiredJwtException e) {
-            throw new JwtException(JwtError.EXPIRED_JWT_TOKEN);
-        } catch (Exception e) {
-            throw new JwtException(JwtError.INVALID_JWT_TOKEN);
-        }
-    }
-
     private String generateAccessToken(String email, String authorities, Long currentTime) {
         return Jwts.builder()
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)

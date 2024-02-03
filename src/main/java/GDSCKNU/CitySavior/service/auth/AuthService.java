@@ -54,19 +54,18 @@ public class AuthService {
 
     // 토큰 재 발급
     @Transactional
-    public TokenResponse reissue(String requestAccessTokenInHeader, String requestRefreshToken) {
-        String requestAccessToken = resolveToken(requestAccessTokenInHeader);
+    public TokenResponse reissue(String accessToken, String refreshToken) {
 
-        Authentication authentication = jwtTokenProvider.getAuthentication(requestAccessToken);
-        String principal = getPrincipal(requestAccessToken);
+        Authentication authentication = jwtTokenProvider.getAuthentication(accessToken);
+        String principal = getPrincipal(accessToken);
 
         String refreshTokenInRedis = redisService.getValues("RT(" + SERVER + "):" + principal);
         if (refreshTokenInRedis == null) {
             return null;
         }
 
-        if (!refreshTokenInRedis.equals(requestRefreshToken)) {
-            jwtTokenProvider.validateRefreshToken(requestRefreshToken);
+        if (!refreshTokenInRedis.equals(refreshToken)) {
+            jwtTokenProvider.validateRefreshToken(refreshToken);
             redisService.deleteValues("RT(" + SERVER + "):" + principal);
             return null;
         }
@@ -154,12 +153,6 @@ public class AuthService {
         } catch (AuthenticationException e) {
             throw e;
         }
-    }
-
-    // 만료 일자를 초과한 토큰 인지 확인
-    public boolean validate(String requestAccessTokenInHeader) {
-        String requestAccessToken = resolveToken(requestAccessTokenInHeader);
-        return jwtTokenProvider.validateAccessTokenAtExpired(requestAccessToken);
     }
 
 }

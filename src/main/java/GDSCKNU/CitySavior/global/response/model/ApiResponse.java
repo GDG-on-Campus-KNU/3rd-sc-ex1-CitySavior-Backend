@@ -31,6 +31,10 @@ public class ApiResponse<T> {
         return new ApiResponse<>(error.getHttpStatusCode(), message);
     }
 
+    public static <T> ApiResponse<T> error(ErrorEnumBase error, T data) {
+        return new ApiResponse<>(error.getHttpStatusCode(), error.getMessage(), data);
+    }
+
     public static <T> ApiResponse<T> error(ErrorEnumBase error, String message, T stackTraceElements) {
         return new ApiResponse<>(error.getHttpStatusCode(), message, stackTraceElements);
     }
