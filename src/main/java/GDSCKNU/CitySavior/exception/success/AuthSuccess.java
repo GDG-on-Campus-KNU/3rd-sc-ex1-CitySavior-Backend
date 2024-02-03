@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 @RequiredArgsConstructor
-public enum AuthSuccessEnum implements SuccessEnumBase {
+public enum AuthSuccess implements SuccessEnumBase {
 
     JOIN_APPLICATION_AND_MAKE_TOKEN_SUCCESS(HttpStatus.OK, "회원가입과 Token 만들기에 성공했습니다."),
     LOGIN_APPLICATION_SUCCESS(HttpStatus.OK, "로그인에 성공했습니다."),
