@@ -103,7 +103,6 @@ public class AuthService {
     public void logout(String requestAccessTokenInHeader) {
         String requestAccessToken = resolveToken(requestAccessTokenInHeader);
         String principal = getPrincipal(requestAccessToken);
-        System.out.println(principal + "principal");
         // Redis에 저장되어 있는 RT 삭제
         String refreshTokenInRedis = redisService.getValues("RT(" + SERVER + "):" + principal);
         if (refreshTokenInRedis != null) {
