@@ -98,7 +98,7 @@ public class JwtTokenProvider implements InitializingBean {
 
     public void validateRefreshToken(String refreshToken) {
         try {
-            if (redisService.getValues(refreshToken).equals("delete")) {
+            if (redisService.getValues(refreshToken) == null) {
                 throw new JwtException(JwtError.INVALID_JWT_TOKEN);
             }
             buildToken(refreshToken);
