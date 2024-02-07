@@ -25,7 +25,7 @@ public class StorageServiceImpl implements StorageService {
         String fileContentType = imgFiles.getContentType();
 
         try {
-            storage.create(
+            storage.createFrom(
                     BlobInfo.newBuilder(bucketName, fileName)
                             .setContentType(fileContentType)
                             .build(),
