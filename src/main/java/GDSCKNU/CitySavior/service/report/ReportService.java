@@ -13,7 +13,7 @@ public interface ReportService {
 
     ReportDetailResponse getReportDetail(Long reportId);
 
-    Map<String, List<MapReportsResponse>> getReportsByGIS(double latitude, double longitude);
+    Map<String, List<MapReportsResponse>> getReportsByGIS(double latitude, double longitude, double radius);
 
     void endReport(Long reportId);
 
