@@ -1,5 +1,7 @@
 package GDSCKNU.CitySavior.service.report;
 
+import static GDSCKNU.CitySavior.exception.error.ReportError.REPORT_NOT_FOUND_ERROR;
+
 import GDSCKNU.CitySavior.domain.Category;
 import GDSCKNU.CitySavior.dto.report.response.MapReportsResponse;
 import GDSCKNU.CitySavior.dto.report.response.ReportDetailResponse;
@@ -7,6 +9,8 @@ import GDSCKNU.CitySavior.dto.report.request.ReportRequest;
 import GDSCKNU.CitySavior.dto.report.response.StatisticsResponse;
 import GDSCKNU.CitySavior.entity.Report;
 import GDSCKNU.CitySavior.entity.ReportComment;
+import GDSCKNU.CitySavior.exception.MemberException;
+import GDSCKNU.CitySavior.exception.ReportException;
 import GDSCKNU.CitySavior.repository.ReportCommentRepository;
 import GDSCKNU.CitySavior.repository.ReportRepository;
 import GDSCKNU.CitySavior.service.report.ReportService;
@@ -55,7 +59,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public ReportDetailResponse getReportDetail(Long reportId) {
         Report findReport = reportRepository.findById(reportId)
-                .orElseThrow(() -> new IllegalArgumentException("해당하는 신고가 없습니다."));
+                .orElseThrow(() -> new ReportException(REPORT_NOT_FOUND_ERROR));
 
         ReportDetailResponse responseDto = conversionService.convert(findReport, ReportDetailResponse.class);
         List commentDtos = conversionService.convert(findReport.getComments(), List.class);
@@ -81,7 +85,7 @@ public class ReportServiceImpl implements ReportService {
     @Transactional
     public void endReport(Long reportId) {
         Report findReport = reportRepository.findById(reportId)
-                .orElseThrow(() -> new IllegalArgumentException("해당하는 신고가 없습니다."));
+                .orElseThrow(() -> new ReportException(REPORT_NOT_FOUND_ERROR));
 
         findReport.endReport();
     }
@@ -90,7 +94,7 @@ public class ReportServiceImpl implements ReportService {
     @Transactional
     public Long addComment(Long reportId, String content) {
         Report findReport = reportRepository.findById(reportId)
-                .orElseThrow(() -> new IllegalArgumentException("해당하는 신고가 없습니다."));
+                .orElseThrow(() -> new ReportException(REPORT_NOT_FOUND_ERROR));
 
         ReportComment reportComment = ReportComment.builder()
                 .create_date(LocalDate.now())
@@ -99,7 +103,6 @@ public class ReportServiceImpl implements ReportService {
                 .build();
 
         reportCommentRepository.save(reportComment);
-        log.info("reportComment = {}", reportComment.getReport_comment_id());
         findReport.addComment(reportComment);
         return reportComment.getReport_comment_id();
     }

@@ -1,9 +1,15 @@
-package GDSCKNU.CitySavior.validator;
+package GDSCKNU.CitySavior.customAnnotation.validator;
+
+import static GDSCKNU.CitySavior.exception.error.CategoryError.CATEGORY_NOT_FOUND_ERROR;
+import static GDSCKNU.CitySavior.global.exception.error.GlobalError.INTERNAL_DATABASE_ERROR;
 
 import GDSCKNU.CitySavior.customAnnotation.CategoryCheck;
+import GDSCKNU.CitySavior.exception.CategoryException;
+import GDSCKNU.CitySavior.global.exception.error.GlobalError;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import java.util.Arrays;
+import org.apache.http.HttpStatus;
 
 public class CategoryValidator implements ConstraintValidator<CategoryCheck, String> {
 
@@ -24,6 +30,6 @@ public class CategoryValidator implements ConstraintValidator<CategoryCheck, Str
             return true;
         }
 
-        return false;
+        throw new CategoryException(CATEGORY_NOT_FOUND_ERROR);
     }
 }
