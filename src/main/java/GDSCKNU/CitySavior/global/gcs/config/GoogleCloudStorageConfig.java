@@ -1,4 +1,4 @@
-package GDSCKNU.CitySavior.config;
+package GDSCKNU.CitySavior.global.gcs.config;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.storage.Storage;
@@ -11,6 +11,7 @@ import org.springframework.core.io.ClassPathResource;
 @Configuration
 public class GoogleCloudStorageConfig {
 
+    //Todo: deprecate storage 수정
     @Bean
     public Storage storage() throws IOException {
 

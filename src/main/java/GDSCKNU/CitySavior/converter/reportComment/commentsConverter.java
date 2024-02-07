@@ -1,16 +1,16 @@
-package GDSCKNU.CitySavior.converter;
+package GDSCKNU.CitySavior.converter.reportComment;
 
-import GDSCKNU.CitySavior.dto.report.response.ReportDetailResponse.CommentDto;
+import GDSCKNU.CitySavior.dto.report.response.ReportDetailResponse.comment;
 import GDSCKNU.CitySavior.entity.ReportComment;
 import java.util.List;
 import org.springframework.core.convert.converter.Converter;
 
-public class ReportCommentsToCommentDtosConverter
-        implements Converter<List<ReportComment>, List<CommentDto>> {
+public class commentsConverter
+        implements Converter<List<ReportComment>, List<comment>> {
     @Override
-    public List<CommentDto> convert(List<ReportComment> reportComments) {
+    public List<comment> convert(List<ReportComment> reportComments) {
         return reportComments.stream()
-                .map(reportComment -> CommentDto.builder()
+                .map(reportComment -> comment.builder()
                         .commentId(reportComment.getReport_comment_id())
                         .content(reportComment.getContent())
                         .createdDate(reportComment.getCreate_date())

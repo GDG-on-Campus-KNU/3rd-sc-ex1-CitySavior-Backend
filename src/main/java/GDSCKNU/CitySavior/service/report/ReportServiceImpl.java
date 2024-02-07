@@ -1,4 +1,4 @@
-package GDSCKNU.CitySavior.service.impl;
+package GDSCKNU.CitySavior.service.report;
 
 import GDSCKNU.CitySavior.domain.Category;
 import GDSCKNU.CitySavior.dto.report.response.MapReportsResponse;
@@ -9,7 +9,7 @@ import GDSCKNU.CitySavior.entity.Report;
 import GDSCKNU.CitySavior.entity.ReportComment;
 import GDSCKNU.CitySavior.repository.ReportCommentRepository;
 import GDSCKNU.CitySavior.repository.ReportRepository;
-import GDSCKNU.CitySavior.service.ReportService;
+import GDSCKNU.CitySavior.service.report.ReportService;
 import jakarta.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;

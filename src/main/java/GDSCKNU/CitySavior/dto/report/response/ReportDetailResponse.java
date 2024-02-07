@@ -12,10 +12,10 @@ public class ReportDetailResponse {
     private String img_url;
     private LocalDate reportDate;
     private LocalDate repairedDate;
-    private List<CommentDto> comments;
+    private List<comment> comments;
 
     @Builder
-    public record CommentDto(
+    public record comment(
         Long commentId,
         String content,
         LocalDate createdDate) {

@@ -1,4 +1,4 @@
-package GDSCKNU.CitySavior.service;
+package GDSCKNU.CitySavior.service.report;
 
 import GDSCKNU.CitySavior.dto.report.response.MapReportsResponse;
 import GDSCKNU.CitySavior.dto.report.response.ReportDetailResponse;

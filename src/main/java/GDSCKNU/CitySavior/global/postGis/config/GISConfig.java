@@ -1,4 +1,4 @@
-package GDSCKNU.CitySavior.config;
+package GDSCKNU.CitySavior.global.postGis.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

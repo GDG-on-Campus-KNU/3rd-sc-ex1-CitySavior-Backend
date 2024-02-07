@@ -1,6 +1,6 @@
-package GDSCKNU.CitySavior.service.impl;
+package GDSCKNU.CitySavior.service.storage;
 
-import GDSCKNU.CitySavior.service.StorageService;
+import GDSCKNU.CitySavior.service.storage.StorageService;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import java.io.IOException;

@@ -1,11 +1,11 @@
-package GDSCKNU.CitySavior.converter;
+package GDSCKNU.CitySavior.converter.report;
 
 
 import GDSCKNU.CitySavior.dto.report.response.MapReportsResponse;
 import GDSCKNU.CitySavior.entity.Report;
 import org.springframework.core.convert.converter.Converter;
 
-public class MapReportsToDtoConverter implements Converter<Report, MapReportsResponse> {
+public class MapReportsResponseConverter implements Converter<Report, MapReportsResponse> {
 
     @Override
     public MapReportsResponse convert(Report reports) {

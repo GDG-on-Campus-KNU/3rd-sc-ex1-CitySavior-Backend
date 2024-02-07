@@ -1,7 +1,5 @@
-package GDSCKNU.CitySavior.service.impl;
+package GDSCKNU.CitySavior.service.ai;
 
-import GDSCKNU.CitySavior.service.AIService;
-import java.util.List;
 import java.util.Random;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
