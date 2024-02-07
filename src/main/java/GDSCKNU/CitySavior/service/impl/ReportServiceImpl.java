@@ -1,10 +1,10 @@
 package GDSCKNU.CitySavior.service.impl;
 
 import GDSCKNU.CitySavior.domain.Category;
-import GDSCKNU.CitySavior.dto.response.MapReportsResponse;
-import GDSCKNU.CitySavior.dto.response.ReportDetailResponse;
-import GDSCKNU.CitySavior.dto.request.ReportRequest;
-import GDSCKNU.CitySavior.dto.response.StatisticsResponse;
+import GDSCKNU.CitySavior.dto.report.response.MapReportsResponse;
+import GDSCKNU.CitySavior.dto.report.response.ReportDetailResponse;
+import GDSCKNU.CitySavior.dto.report.request.ReportRequest;
+import GDSCKNU.CitySavior.dto.report.response.StatisticsResponse;
 import GDSCKNU.CitySavior.entity.Report;
 import GDSCKNU.CitySavior.entity.ReportComment;
 import GDSCKNU.CitySavior.repository.ReportCommentRepository;

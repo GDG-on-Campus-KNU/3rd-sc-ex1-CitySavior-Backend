@@ -1,6 +1,6 @@
 package GDSCKNU.CitySavior.entity.achievement;
 
-import GDSCKNU.CitySavior.dto.response.AchievementsResponse;
+import GDSCKNU.CitySavior.dto.achievement.AchievementsResponse;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

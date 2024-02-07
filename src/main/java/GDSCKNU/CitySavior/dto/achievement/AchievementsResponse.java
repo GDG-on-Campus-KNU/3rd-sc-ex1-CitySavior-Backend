@@ -1,4 +1,4 @@
-package GDSCKNU.CitySavior.dto.response;
+package GDSCKNU.CitySavior.dto.achievement;
 
 import lombok.Builder;
 

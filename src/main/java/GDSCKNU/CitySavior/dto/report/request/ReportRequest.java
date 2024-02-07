@@ -1,4 +1,4 @@
-package GDSCKNU.CitySavior.dto.request;
+package GDSCKNU.CitySavior.dto.report.request;
 
 import GDSCKNU.CitySavior.annotation.CategoryCheck;
 import GDSCKNU.CitySavior.domain.Category;

@@ -1,4 +1,4 @@
-package GDSCKNU.CitySavior.dto.response;
+package GDSCKNU.CitySavior.dto.report.response;
 
 import GDSCKNU.CitySavior.domain.Category;
 import lombok.Builder;
