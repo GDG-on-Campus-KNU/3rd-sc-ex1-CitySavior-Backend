@@ -1,10 +1,10 @@
 package GDSCKNU.CitySavior.service.impl;
 
 import GDSCKNU.CitySavior.domain.Category;
-import GDSCKNU.CitySavior.dto.response.MapReportsResponseDto;
-import GDSCKNU.CitySavior.dto.response.ReportDetailResponseDto;
-import GDSCKNU.CitySavior.dto.request.ReportRequestDto;
-import GDSCKNU.CitySavior.dto.response.StatisticsResponseDto;
+import GDSCKNU.CitySavior.dto.response.MapReportsResponse;
+import GDSCKNU.CitySavior.dto.response.ReportDetailResponse;
+import GDSCKNU.CitySavior.dto.request.ReportRequest;
+import GDSCKNU.CitySavior.dto.response.StatisticsResponse;
 import GDSCKNU.CitySavior.entity.Report;
 import GDSCKNU.CitySavior.entity.ReportComment;
 import GDSCKNU.CitySavior.repository.ReportCommentRepository;
@@ -12,10 +12,8 @@ import GDSCKNU.CitySavior.repository.ReportRepository;
 import GDSCKNU.CitySavior.service.ReportService;
 import jakarta.transaction.Transactional;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.locationtech.jts.geom.Coordinate;
@@ -39,7 +37,7 @@ public class ReportServiceImpl implements ReportService {
     private final ConversionService conversionService;
 
     @Override
-    public Long saveReport(ReportRequestDto requestDto, double weight, String img_url) {
+    public Long saveReport(ReportRequest requestDto, double weight, String img_url) {
         Report report = Report.builder()
                 .weight(weight)
                 .description(requestDto.description())
@@ -55,11 +53,11 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public ReportDetailResponseDto getReportDetail(Long reportId) {
+    public ReportDetailResponse getReportDetail(Long reportId) {
         Report findReport = reportRepository.findById(reportId)
                 .orElseThrow(() -> new IllegalArgumentException("해당하는 신고가 없습니다."));
 
-        ReportDetailResponseDto responseDto = conversionService.convert(findReport, ReportDetailResponseDto.class);
+        ReportDetailResponse responseDto = conversionService.convert(findReport, ReportDetailResponse.class);
         List commentDtos = conversionService.convert(findReport.getComments(), List.class);
         responseDto.changeImgUrl(url);
         responseDto.setComments(commentDtos);
@@ -72,8 +70,8 @@ public class ReportServiceImpl implements ReportService {
                 geometryFactory.createPoint(
                         new Coordinate(longitude, latitude)), 1000.0);
 
-        List<MapReportsResponseDto> points = reports.stream()
-                .map(report -> conversionService.convert(report, MapReportsResponseDto.class))
+        List<MapReportsResponse> points = reports.stream()
+                .map(report -> conversionService.convert(report, MapReportsResponse.class))
                 .toList();
 
         return Map.of("points", points);
@@ -107,10 +105,10 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public StatisticsResponseDto getStatistics(double latitude, double longitude) {
+    public StatisticsResponse getStatistics(double latitude, double longitude) {
         List<Report> reports = reportRepository.findReportsWithinRadius(
                 geometryFactory.createPoint(new Coordinate(longitude, latitude)), 1000.0);
 
-        return new StatisticsResponseDto(reports);
+        return new StatisticsResponse(reports);
     }
 }

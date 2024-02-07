@@ -1,11 +1,11 @@
 package GDSCKNU.CitySavior.controller;
 
 import GDSCKNU.CitySavior.annotation.HasFile;
-import GDSCKNU.CitySavior.dto.request.CreateReportCommentRequestDto;
-import GDSCKNU.CitySavior.dto.response.MapReportsResponseDto;
-import GDSCKNU.CitySavior.dto.response.ReportDetailResponseDto;
-import GDSCKNU.CitySavior.dto.request.ReportRequestDto;
-import GDSCKNU.CitySavior.dto.response.StatisticsResponseDto;
+import GDSCKNU.CitySavior.dto.request.CreateReportCommentRequest;
+import GDSCKNU.CitySavior.dto.response.MapReportsResponse;
+import GDSCKNU.CitySavior.dto.response.ReportDetailResponse;
+import GDSCKNU.CitySavior.dto.request.ReportRequest;
+import GDSCKNU.CitySavior.dto.response.StatisticsResponse;
 import GDSCKNU.CitySavior.service.AIService;
 import GDSCKNU.CitySavior.service.ReportService;
 import GDSCKNU.CitySavior.service.StorageService;
@@ -36,25 +36,25 @@ public class ReportsController {
     private final ReportService reportService;
 
     @GetMapping("/reports/{report_id}")
-    public ReportDetailResponseDto reportDetail(@PathVariable("report_id") Long reportId) {
+    public ReportDetailResponse reportDetail(@PathVariable("report_id") Long reportId) {
         return reportService.getReportDetail(reportId);
     }
 
     @GetMapping("/reports")
-    public Map<String, List<MapReportsResponseDto>> getReportsByGIS(@RequestParam(name = "latitude") double latitude,
-                                                                    @RequestParam(name = "longitude") double longitude) {
+    public Map<String, List<MapReportsResponse>> getReportsByGIS(@RequestParam(name = "latitude") double latitude,
+                                                                 @RequestParam(name = "longitude") double longitude) {
         return reportService.getReportsByGIS(latitude, longitude);
     }
 
     @GetMapping("/reports/statistics")
-    public StatisticsResponseDto getStatistics(@RequestParam("latitude") double latitude,
-                                               @RequestParam("longitude") double longitude) {
+    public StatisticsResponse getStatistics(@RequestParam("latitude") double latitude,
+                                            @RequestParam("longitude") double longitude) {
         return reportService.getStatistics(latitude, longitude);
     }
 
     @PostMapping("/reports")
     public Long report(@RequestPart(name = "imgFiles") @HasFile MultipartFile imgFiles,
-                       @RequestPart(name = "requestDto") @Valid ReportRequestDto requestDto) {
+                       @RequestPart(name = "requestDto") @Valid ReportRequest requestDto) {
 
         String fileName = storageService.saveFile(imgFiles);
         int damageRate = aiService.evaluateDamageRate(imgFiles);
@@ -63,7 +63,7 @@ public class ReportsController {
 
     @PostMapping("/reports/{report_id}/comment")
     public Long comment(@PathVariable("report_id") Long reportId,
-                        @RequestBody CreateReportCommentRequestDto comment) {
+                        @RequestBody CreateReportCommentRequest comment) {
         return reportService.addComment(reportId, comment.comment());
     }
 

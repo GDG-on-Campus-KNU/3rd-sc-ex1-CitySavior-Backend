@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import lombok.Data;
 
 @Data
-public class StatisticsResponseDto {
+public class StatisticsResponse {
     private int totalReports;
     private int resolvedReports;
     private Map<Category, StatisticsDetails> statisticsDetails;
@@ -34,7 +34,7 @@ public class StatisticsResponseDto {
         }
     }
 
-    public StatisticsResponseDto(List<Report> reports) {
+    public StatisticsResponse(List<Report> reports) {
         initStatisticsDetails();
         totalReports = reports.size();
         reports.forEach(report -> {
