@@ -1,6 +1,5 @@
-package GDSCKNU.CitySavior.annotation;
+package GDSCKNU.CitySavior.customAnnotation;
 
-import GDSCKNU.CitySavior.validator.CategoryValidator;
 import GDSCKNU.CitySavior.validator.HasFileValidator;
 import jakarta.validation.Constraint;
 import java.lang.annotation.Documented;

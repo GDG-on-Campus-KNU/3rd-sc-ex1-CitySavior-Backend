@@ -1,6 +1,6 @@
 package GDSCKNU.CitySavior.controller;
 
-import GDSCKNU.CitySavior.annotation.HasFile;
+import GDSCKNU.CitySavior.customAnnotation.HasFile;
 import GDSCKNU.CitySavior.dto.reportComment.request.CreateReportCommentRequest;
 import GDSCKNU.CitySavior.dto.report.response.MapReportsResponse;
 import GDSCKNU.CitySavior.dto.report.response.ReportDetailResponse;

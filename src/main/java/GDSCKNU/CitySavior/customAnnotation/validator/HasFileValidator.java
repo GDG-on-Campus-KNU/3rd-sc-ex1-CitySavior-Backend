@@ -1,6 +1,6 @@
 package GDSCKNU.CitySavior.validator;
 
-import GDSCKNU.CitySavior.annotation.HasFile;
+import GDSCKNU.CitySavior.customAnnotation.HasFile;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.web.multipart.MultipartException;

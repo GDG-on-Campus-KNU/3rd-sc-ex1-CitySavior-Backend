@@ -1,6 +1,6 @@
 package GDSCKNU.CitySavior.dto.report.request;
 
-import GDSCKNU.CitySavior.annotation.CategoryCheck;
+import GDSCKNU.CitySavior.customAnnotation.CategoryCheck;
 import GDSCKNU.CitySavior.domain.Category;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
