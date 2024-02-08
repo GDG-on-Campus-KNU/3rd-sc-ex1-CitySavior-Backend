@@ -1,17 +1,14 @@
 package GDSCKNU.CitySavior.entity;
 
 import GDSCKNU.CitySavior.domain.Category;
-import GDSCKNU.CitySavior.entity.member.Member;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
+import org.locationtech.jts.geom.*;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.List;
@@ -19,8 +16,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.locationtech.jts.geom.Point;
 
 @Entity
 @Builder
@@ -44,11 +39,6 @@ public class Report {
     private LocalDate report_date;
     @OneToMany(mappedBy = "report")
     private List<ReportComment> comments;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", nullable = false)
-    @ToString.Exclude
-    private Member member;
 
     public void endReport() {
         this.repaired_date = LocalDate.now();
