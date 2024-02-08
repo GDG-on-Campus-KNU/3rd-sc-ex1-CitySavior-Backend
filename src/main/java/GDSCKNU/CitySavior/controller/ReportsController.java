@@ -1,17 +1,14 @@
 package GDSCKNU.CitySavior.controller;
 
 import GDSCKNU.CitySavior.annotation.HasFile;
-import GDSCKNU.CitySavior.common.resolver.annotation.UserInfo;
 import GDSCKNU.CitySavior.dto.request.CreateReportCommentRequestDto;
-import GDSCKNU.CitySavior.dto.request.ReportRequestDto;
 import GDSCKNU.CitySavior.dto.response.MapReportsResponseDto;
 import GDSCKNU.CitySavior.dto.response.ReportDetailResponseDto;
+import GDSCKNU.CitySavior.dto.request.ReportRequestDto;
 import GDSCKNU.CitySavior.dto.response.StatisticsResponseDto;
-import GDSCKNU.CitySavior.entity.memberDetail.MemberDetailsImpl;
 import GDSCKNU.CitySavior.service.AIService;
 import GDSCKNU.CitySavior.service.ReportService;
 import GDSCKNU.CitySavior.service.StorageService;
-import GDSCKNU.CitySavior.service.achieveMember.AchievementMemberService;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +34,6 @@ public class ReportsController {
     private final StorageService storageService;
     private final AIService aiService;
     private final ReportService reportService;
-    private final AchievementMemberService achievementMemberService;
 
     @GetMapping("/reports/{report_id}")
     public ReportDetailResponseDto reportDetail(@PathVariable("report_id") Long reportId) {
@@ -58,12 +54,10 @@ public class ReportsController {
 
     @PostMapping("/reports")
     public Long report(@RequestPart(name = "imgFiles") @HasFile MultipartFile imgFiles,
-                       @UserInfo MemberDetailsImpl memberDetails,
                        @RequestPart(name = "requestDto") @Valid ReportRequestDto requestDto) {
 
         String fileName = storageService.saveFile(imgFiles);
         int damageRate = aiService.evaluateDamageRate(imgFiles);
-        achievementMemberService.updateAchievementRecord(requestDto.category(), memberDetails);
         return reportService.saveReport(requestDto, damageRate, fileName);
     }
 

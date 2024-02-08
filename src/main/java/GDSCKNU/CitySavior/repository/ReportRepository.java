@@ -19,8 +19,4 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
     List<Report> findReportsWithinRadius(@Param("point") Point point,
                                          @Param("radius") double radius);
 
-    int countReportByMemberEmail(String email);
-
-    @Query("SELECT COUNT(r) FROM Report r WHERE r.member.email = :email AND r.repaired_date IS NOT NULL")
-    int countReportByMemberEmailAndRepaired_dateIsNotNull(@Param("email") String email);
 }
