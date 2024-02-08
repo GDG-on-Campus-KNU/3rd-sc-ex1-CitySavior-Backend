@@ -23,6 +23,7 @@ public class MemberService {
 
         Member member = Member.builder()
                 .email(createV1Request.email())
+                .isAdmin(true)
                 .build();
 
         memberRepository.save(member);
