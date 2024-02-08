@@ -1,6 +1,7 @@
 package GDSCKNU.CitySavior.global.jwt.provider;
 
 import GDSCKNU.CitySavior.dto.member.response.TokenResponse;
+import GDSCKNU.CitySavior.entity.memberDetail.MemberDetailsImpl;
 import GDSCKNU.CitySavior.global.jwt.entity.NoPasswordAuthenticationToken;
 import GDSCKNU.CitySavior.global.jwt.exception.JwtException;
 import GDSCKNU.CitySavior.global.jwt.exception.error.JwtError;
@@ -86,7 +87,7 @@ public class JwtTokenProvider implements InitializingBean {
         // userName == email
     }
 
-    private UserDetails getUserDetailsFromToken(String accessToken) {
+    public MemberDetailsImpl getUserDetailsFromToken(String accessToken) {
         String email = getClaims(accessToken).get("email").toString();
         return memberDetailService.loadUserByUsername(email);
     }
