@@ -40,6 +40,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
@@ -64,7 +65,6 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
-
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(
                 AuthenticationManagerBuilder.class);
         authenticationManagerBuilder.authenticationProvider(authenticationProvider());
@@ -79,10 +79,9 @@ public class SecurityConfig {
     @Bean
     public NoPasswordAuthenticationFilter noPasswordAuthenticationFilter(HttpSecurity http) throws Exception {
         NoPasswordAuthenticationFilter noPasswordAuthenticationFilter = new NoPasswordAuthenticationFilter(
-                new AntPathRequestMatcher("/login", HttpMethod.POST.name()));
+                new AntPathRequestMatcher("/v1/login", HttpMethod.POST.name()));
 
         noPasswordAuthenticationFilter.setAuthenticationManager(authenticationManager(http));
-
         return noPasswordAuthenticationFilter;
     }
 }
