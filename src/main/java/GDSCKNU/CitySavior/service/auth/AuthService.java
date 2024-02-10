@@ -10,7 +10,7 @@ import GDSCKNU.CitySavior.exception.error.MemberError;
 import GDSCKNU.CitySavior.global.jwt.entity.NoPasswordAuthenticationToken;
 import GDSCKNU.CitySavior.global.jwt.provider.JwtTokenProvider;
 import GDSCKNU.CitySavior.global.redis.service.RedisService;
-import GDSCKNU.CitySavior.repository.MemberRepository;
+import GDSCKNU.CitySavior.repository.member.MemberRepository;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;

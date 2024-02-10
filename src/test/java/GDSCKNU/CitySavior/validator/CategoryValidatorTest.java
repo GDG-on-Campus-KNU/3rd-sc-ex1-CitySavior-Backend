@@ -3,7 +3,7 @@ package GDSCKNU.CitySavior.validator;
 
 import static org.assertj.core.api.Assertions.*;
 
-import GDSCKNU.CitySavior.dto.request.ReportRequestDto;
+import GDSCKNU.CitySavior.dto.report.request.ReportRequest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -27,14 +27,14 @@ class CategoryValidatorTest {
     @DisplayName("Category에 없는 값을 입력했을 때 검증에 실패한다.")
     public void CategoryTest() throws Exception {
         //given
-        ReportRequestDto reportRequestDto = new ReportRequestDto(
+        ReportRequest reportRequest = new ReportRequest(
                 12.123,
                 12.123,
                 "testDescription",
                 "invalidCategory");
 
         //when
-        Set<ConstraintViolation<ReportRequestDto>> violations = validator.validate(reportRequestDto);
+        Set<ConstraintViolation<ReportRequest>> violations = validator.validate(reportRequest);
 
         //then
         assertThat(violations.size()).isEqualTo(1);
