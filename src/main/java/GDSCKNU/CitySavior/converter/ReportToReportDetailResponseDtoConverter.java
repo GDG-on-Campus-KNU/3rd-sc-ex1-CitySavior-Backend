@@ -1,14 +1,14 @@
 package GDSCKNU.CitySavior.converter;
 
-import GDSCKNU.CitySavior.dto.response.ReportDetailResponseDto;
+import GDSCKNU.CitySavior.dto.response.ReportDetailResponse;
 import GDSCKNU.CitySavior.entity.Report;
 import org.springframework.core.convert.converter.Converter;
 
-public class ReportToReportDetailResponseDtoConverter implements Converter<Report, ReportDetailResponseDto> {
+public class ReportToReportDetailResponseDtoConverter implements Converter<Report, ReportDetailResponse> {
     @Override
-    public ReportDetailResponseDto convert(Report report) {
+    public ReportDetailResponse convert(Report report) {
 
-        return ReportDetailResponseDto.builder()
+        return ReportDetailResponse.builder()
                 .description(report.getDescription())
                 .reportDate(report.getReport_date())
                 .repairedDate(report.getRepaired_date())

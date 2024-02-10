@@ -1,6 +1,6 @@
 package GDSCKNU.CitySavior.dto.request;
 
-public record CreateReportCommentRequestDto(
+public record CreateReportCommentRequest(
         String comment
 ) {
 }

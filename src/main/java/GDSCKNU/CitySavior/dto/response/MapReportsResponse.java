@@ -4,7 +4,7 @@ import GDSCKNU.CitySavior.domain.Category;
 import lombok.Builder;
 
 @Builder
-public record MapReportsResponseDto(
+public record MapReportsResponse(
         Long reportId,
         double latitude,
         double longitude,

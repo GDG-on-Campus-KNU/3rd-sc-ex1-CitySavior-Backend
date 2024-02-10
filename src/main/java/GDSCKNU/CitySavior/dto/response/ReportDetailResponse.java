@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class ReportDetailResponseDto{
+public class ReportDetailResponse {
     private String description;
     private String img_url;
     private LocalDate reportDate;
