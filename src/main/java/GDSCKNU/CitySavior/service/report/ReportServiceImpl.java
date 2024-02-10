@@ -105,9 +105,6 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public StatisticsResponse getStatistics(double latitude, double longitude) {
-        List<Report> reports = reportRepository.findReportsWithinRadius(
-                geometryFactory.createPoint(new Coordinate(longitude, latitude)), 1000.0);
-
-        return new StatisticsResponse(reports);
+        return new StatisticsResponse(reportRepository.findAll());
     }
 }
