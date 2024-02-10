@@ -42,8 +42,9 @@ public class ReportsController {
 
     @GetMapping("/reports")
     public Map<String, List<MapReportsResponse>> getReportsByGIS(@RequestParam(name = "latitude") double latitude,
-                                                                 @RequestParam(name = "longitude") double longitude) {
-        return reportService.getReportsByGIS(latitude, longitude);
+                                                                 @RequestParam(name = "longitude") double longitude,
+                                                                 @RequestParam(name = "radius") int radius) {
+        return reportService.getReportsByGIS(latitude, longitude, radius);
     }
 
     @GetMapping("/reports/statistics")

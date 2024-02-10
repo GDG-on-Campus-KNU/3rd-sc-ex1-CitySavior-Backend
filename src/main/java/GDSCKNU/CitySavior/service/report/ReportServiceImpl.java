@@ -64,10 +64,10 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public Map getReportsByGIS(double latitude, double longitude) {
+    public Map getReportsByGIS(double latitude, double longitude, int radius) {
         List<Report> reports = reportRepository.findReportsWithinRadius(
                 geometryFactory.createPoint(
-                        new Coordinate(longitude, latitude)), 1000.0);
+                        new Coordinate(longitude, latitude)), radius);
 
         List<MapReportsResponse> points = reports.stream()
                 .map(report -> conversionService.convert(report, MapReportsResponse.class))
