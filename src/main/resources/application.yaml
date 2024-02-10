@@ -1,9 +1,121 @@
 spring:
   profiles:
-    active: dev
+    active: blue
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: blue
+
+  datasource:
+    url: jdbc:postgresql://34.64.74.170:5432/citysavior
+    username: postgres
+    password: citysaviorDB
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+    database: postgresql
+    show-sql: true
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: 1234
 
   cloud:
     gcp:
       storage:
         bucket: city-savior-storage
         url: https://storage.googleapis.com/city-savior-storage/
+
+jwt:
+  secret: dkssudgk223tp2dyWlrmaQnXjwlswkDkan9anakfdm0goqhfurhGkqslek1rhkdusDsldsp3rpajrglfWlsmsAhfmRpTjdyskehXWw
+  access-token-expiration: 43200 # 12시간
+  refresh-token-expiration: 1209600 # 2주
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+springdoc:
+  packages-to-scan: GDSCKNU.CitySavior
+  default-consumes-media-type: application/json;charset=UTF-8 # UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+  swagger-ui:
+    path: / # swagger 경로
+    disable-swagger-default-url: true # default 경로 disable
+    display-request-duration: true
+    operations-sorter: alpha # Path 순으로 정렬
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: green
+
+  datasource:
+    url: jdbc:postgresql://34.64.74.170:5432/citysavior
+    username: postgres
+    password: citysaviorDB
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+    database: postgresql
+    show-sql: true
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: 1234
+
+  cloud:
+    gcp:
+      storage:
+        bucket: city-savior-storage
+        url: https://storage.googleapis.com/city-savior-storage/
+
+jwt:
+  secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK
+
+server:
+  port: 8082
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+logging:
+  level:
+    org.hibernate.type.descriptor.sql: trace
+
+springdoc:
+  packages-to-scan: GDSCKNU.CitySavior
+  default-consumes-media-type: application/json;charset=UTF-8 # UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+  swagger-ui:
+    path: / # swagger 경로
+    disable-swagger-default-url: true # default 경로 disable
+    display-request-duration: true
+    operations-sorter: alpha # Path 순으로 정렬

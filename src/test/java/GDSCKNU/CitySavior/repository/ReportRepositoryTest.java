@@ -3,7 +3,8 @@ package GDSCKNU.CitySavior.repository;
 import static org.junit.jupiter.api.Assertions.*;
 
 import GDSCKNU.CitySavior.domain.Category;
-import GDSCKNU.CitySavior.entity.Report;
+import GDSCKNU.CitySavior.entity.report.Report;
+import GDSCKNU.CitySavior.repository.report.ReportRepository;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

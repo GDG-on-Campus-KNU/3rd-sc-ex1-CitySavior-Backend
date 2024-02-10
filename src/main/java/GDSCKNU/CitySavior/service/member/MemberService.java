@@ -4,7 +4,7 @@ import GDSCKNU.CitySavior.dto.member.request.MemberCreateV1Request;
 import GDSCKNU.CitySavior.entity.member.Member;
 import GDSCKNU.CitySavior.exception.MemberException;
 import GDSCKNU.CitySavior.exception.error.MemberError;
-import GDSCKNU.CitySavior.repository.MemberRepository;
+import GDSCKNU.CitySavior.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

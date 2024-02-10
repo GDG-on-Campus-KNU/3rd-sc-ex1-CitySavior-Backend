@@ -1,8 +1,8 @@
 package GDSCKNU.CitySavior.config;
 
-import GDSCKNU.CitySavior.converter.ReportCommentsToCommentDtosConverter;
-import GDSCKNU.CitySavior.converter.ReportToReportDetailResponseDtoConverter;
-import GDSCKNU.CitySavior.converter.MapReportsToDtoConverter;
+import GDSCKNU.CitySavior.converter.comment.CommentConverter;
+import GDSCKNU.CitySavior.converter.report.ReportDetailResponseConverter;
+import GDSCKNU.CitySavior.converter.report.MapReportsConverter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -12,8 +12,8 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(new MapReportsToDtoConverter());
-        registry.addConverter(new ReportToReportDetailResponseDtoConverter());
-        registry.addConverter(new ReportCommentsToCommentDtosConverter());
+        registry.addConverter(new MapReportsConverter());
+        registry.addConverter(new ReportDetailResponseConverter());
+        registry.addConverter(new CommentConverter());
     }
 }

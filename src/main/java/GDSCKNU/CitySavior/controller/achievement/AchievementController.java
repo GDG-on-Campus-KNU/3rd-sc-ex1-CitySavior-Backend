@@ -1,6 +1,6 @@
 package GDSCKNU.CitySavior.controller.achievement;
 
-import GDSCKNU.CitySavior.dto.response.AchievementsResponse;
+import GDSCKNU.CitySavior.dto.achievement.response.AchievementsResponse;
 import GDSCKNU.CitySavior.entity.achievement.Achievement;
 import GDSCKNU.CitySavior.repository.achievment.AchievementRepository;
 import java.util.List;
