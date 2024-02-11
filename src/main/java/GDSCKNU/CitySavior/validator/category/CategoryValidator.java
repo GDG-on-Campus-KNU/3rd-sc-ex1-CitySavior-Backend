@@ -1,6 +1,7 @@
 package GDSCKNU.CitySavior.validator.category;
 
 import GDSCKNU.CitySavior.annotation.CategoryCheck;
+import GDSCKNU.CitySavior.domain.Category;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import java.util.Arrays;

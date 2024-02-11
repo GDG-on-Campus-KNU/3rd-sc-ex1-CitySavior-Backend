@@ -74,6 +74,7 @@ public class AchievementMemberService {
 
     @Transactional
     public void updateNewAchievementMember(Achievement achievement, MemberDetailsImpl memberDetails) {
+        log.info("email:{}", memberDetails.getUsername());
         Member member = memberRepository.findByEmail(memberDetails.getUsername())
                 .orElseThrow(() -> new MemberException(MemberError.MEMBER_NOT_FOUND_ERROR));
 

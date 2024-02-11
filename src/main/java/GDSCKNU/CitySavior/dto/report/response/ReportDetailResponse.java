@@ -22,7 +22,7 @@ public class ReportDetailResponse {
     }
 
     public void changeImgUrl(String url){
-        this.img_url += url;
+        this.img_url = url + this.img_url;
     }
 
 

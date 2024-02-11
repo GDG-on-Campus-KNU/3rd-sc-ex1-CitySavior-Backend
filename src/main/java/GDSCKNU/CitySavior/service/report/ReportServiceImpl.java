@@ -5,6 +5,7 @@ import GDSCKNU.CitySavior.dto.report.response.MapReportsResponse;
 import GDSCKNU.CitySavior.dto.report.response.ReportDetailResponse;
 import GDSCKNU.CitySavior.dto.report.request.ReportRequest;
 import GDSCKNU.CitySavior.dto.report.response.StatisticsResponse;
+import GDSCKNU.CitySavior.entity.member.Member;
 import GDSCKNU.CitySavior.entity.report.Report;
 import GDSCKNU.CitySavior.entity.reportComment.ReportComment;
 import GDSCKNU.CitySavior.repository.reportComment.ReportCommentRepository;
@@ -36,7 +37,7 @@ public class ReportServiceImpl implements ReportService {
     private final ConversionService conversionService;
 
     @Override
-    public Long saveReport(ReportRequest requestDto, double weight, String img_url) {
+    public Long saveReport(ReportRequest requestDto, double weight, String img_url, Member member) {
         Report report = Report.builder()
                 .weight(weight)
                 .description(requestDto.description())
@@ -45,10 +46,11 @@ public class ReportServiceImpl implements ReportService {
                 .category(Category.valueOf(requestDto.category()))
                 .report_date(LocalDate.now())
                 .comments(List.of())
+                .member(member)
                 .build();
 
-        Report saveReport = reportRepository.save(report);
-        return saveReport.getReport_id();
+        reportRepository.save(report);
+        return report.getReport_id();
     }
 
     @Override
@@ -64,10 +66,10 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public Map getReportsByGIS(double latitude, double longitude) {
+    public Map getReportsByGIS(double latitude, double longitude, int radius) {
         List<Report> reports = reportRepository.findReportsWithinRadius(
-                geometryFactory.createPoint(
-                        new Coordinate(longitude, latitude)), 1000.0);
+                geometryFactory.createPoint(new Coordinate(longitude, latitude)),
+                radius);
 
         List<MapReportsResponse> points = reports.stream()
                 .map(report -> conversionService.convert(report, MapReportsResponse.class))
@@ -104,10 +106,7 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public StatisticsResponse getStatistics(double latitude, double longitude) {
-        List<Report> reports = reportRepository.findReportsWithinRadius(
-                geometryFactory.createPoint(new Coordinate(longitude, latitude)), 1000.0);
-
-        return new StatisticsResponse(reports);
+    public StatisticsResponse getStatistics() {
+        return new StatisticsResponse(reportRepository.findAll());
     }
 }
