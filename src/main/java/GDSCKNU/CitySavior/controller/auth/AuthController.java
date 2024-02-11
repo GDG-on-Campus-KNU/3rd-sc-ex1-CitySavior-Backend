@@ -6,7 +6,6 @@ import GDSCKNU.CitySavior.dto.member.request.MemberLoginV1Request;
 import GDSCKNU.CitySavior.dto.member.response.TokenResponse;
 import GDSCKNU.CitySavior.dto.token.request.TokenReissueRequest;
 import GDSCKNU.CitySavior.entity.memberDetail.MemberDetailsImpl;
-import GDSCKNU.CitySavior.exception.error.AuthError;
 import GDSCKNU.CitySavior.exception.success.AuthSuccess;
 import GDSCKNU.CitySavior.global.response.model.ApiResponse;
 import GDSCKNU.CitySavior.global.util.ResponseAuth;
@@ -43,11 +42,13 @@ public class AuthController {
     )
     @PostMapping("/signup")
     @Transactional
-    public ApiResponse<TokenResponse> signup(@RequestBody MemberCreateV1Request memberCreateV1Request) {
+    public ResponseEntity<TokenResponse> signup(@RequestBody MemberCreateV1Request memberCreateV1Request) {
         memberService.registerMember(memberCreateV1Request);
         TokenResponse tokenDto = authService.join(memberCreateV1Request);
 
-        return ApiResponse.success(AuthSuccess.JOIN_APPLICATION_AND_MAKE_TOKEN_SUCCESS, tokenDto);
+        return ResponseEntity
+                .ok()
+                .body(tokenDto);
     }
 
 
@@ -56,10 +57,12 @@ public class AuthController {
     )
     @PostMapping("/login")
 
-    public ApiResponse<TokenResponse> login(@RequestBody MemberLoginV1Request memberLoginV1Request) {
+    public ResponseEntity<TokenResponse> login(@RequestBody MemberLoginV1Request memberLoginV1Request) {
         TokenResponse tokenDto = authService.login(memberLoginV1Request);
 
-        return ApiResponse.success(AuthSuccess.LOGIN_APPLICATION_SUCCESS, tokenDto);
+        return ResponseEntity
+                .ok()
+                .body(tokenDto);
     }
 
     /*
@@ -80,17 +83,20 @@ public class AuthController {
             summary = "토큰 reissue 진행"
     )
     @PostMapping("/reissue")
-    public ApiResponse<TokenResponse> reissue(
+    public ResponseEntity<TokenResponse> reissue(
             @RequestBody TokenReissueRequest tokenReissueRequest) {
         TokenResponse reissuedTokenDto = authService.reissue(tokenReissueRequest.accessToken(),
                 tokenReissueRequest.refreshToken());
 
         if (reissuedTokenDto != null) {
 
-            return ApiResponse.success(AuthSuccess.REISSUE_APPLICATION_SUCCESS, reissuedTokenDto);
+            return ResponseEntity
+                    .ok(reissuedTokenDto);
 
         } else {
-            return ApiResponse.error(AuthError.TOKEN_REISSUE_FAILED_ERROR, reissuedTokenDto);
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(reissuedTokenDto);
         }
     }
 
