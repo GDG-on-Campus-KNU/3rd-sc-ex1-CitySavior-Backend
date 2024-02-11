@@ -6,8 +6,10 @@ import GDSCKNU.CitySavior.dto.report.request.ReportRequest;
 import GDSCKNU.CitySavior.dto.report.response.MapReportsResponse;
 import GDSCKNU.CitySavior.dto.report.response.ReportDetailResponse;
 import GDSCKNU.CitySavior.dto.report.response.StatisticsResponse;
+import GDSCKNU.CitySavior.entity.member.Member;
 import GDSCKNU.CitySavior.entity.memberDetail.MemberDetailsImpl;
 import GDSCKNU.CitySavior.service.ai.AIService;
+import GDSCKNU.CitySavior.service.member.MemberService;
 import GDSCKNU.CitySavior.service.report.ReportService;
 import GDSCKNU.CitySavior.service.storage.StorageService;
 import GDSCKNU.CitySavior.service.achieveMember.AchievementMemberService;
@@ -17,6 +19,7 @@ import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +37,7 @@ public class ReportsController {
     private final AIService aiService;
     private final ReportService reportService;
     private final AchievementMemberService achievementMemberService;
+    private final MemberService memberService;
 
     @GetMapping("/reports/{report_id}")
     public ReportDetailResponse reportDetail(@PathVariable("report_id") Long reportId) {
@@ -61,6 +65,13 @@ public class ReportsController {
         String fileName = storageService.saveFile(imgFiles);
         int damageRate = aiService.evaluateDamageRate(imgFiles);
         achievementMemberService.updateAchievementRecord(requestDto.category(), memberDetails);
-        return reportService.saveReport(requestDto, damageRate, fileName);
+        Member member = memberService.findMemberByEmail(memberDetails.getUsername());
+
+        return reportService.saveReport(requestDto, damageRate, fileName, member);
+    }
+
+    @PatchMapping("/reports/{report_id}/end")
+    public void endReport(@PathVariable("report_id") Long reportId) {
+        reportService.endReport(reportId);
     }
 }

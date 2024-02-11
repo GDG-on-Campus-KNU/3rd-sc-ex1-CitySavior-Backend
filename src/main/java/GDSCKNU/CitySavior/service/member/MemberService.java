@@ -6,10 +6,12 @@ import GDSCKNU.CitySavior.exception.MemberException;
 import GDSCKNU.CitySavior.exception.error.MemberError;
 import GDSCKNU.CitySavior.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class MemberService {
 
@@ -29,5 +31,10 @@ public class MemberService {
                 .build();
 
         memberRepository.save(member);
+    }
+
+    public Member findMemberByEmail(String email) {
+        return memberRepository.findByEmail(email)
+                .orElseThrow(() -> new MemberException(MemberError.MEMBER_NOT_FOUND_ERROR));
     }
 }

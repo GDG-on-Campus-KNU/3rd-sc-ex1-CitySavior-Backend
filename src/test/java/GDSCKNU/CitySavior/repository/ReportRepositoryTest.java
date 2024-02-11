@@ -65,4 +65,14 @@ class ReportRepositoryTest {
                     report.getLocation().getY());
         }
     }
+
+    @Test
+    @DisplayName("인자로 null이 주어지면 빈 리스트를 반환한다.")
+    public void countReportByMemberEmailTest() throws Exception{
+        //when
+        int i = reportRepository.countReportByMemberEmail(null);
+
+        //then
+        assertEquals(0, i);
+    }
 }
