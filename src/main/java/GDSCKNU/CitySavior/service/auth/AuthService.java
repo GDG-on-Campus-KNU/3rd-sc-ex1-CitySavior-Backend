@@ -5,6 +5,7 @@ import GDSCKNU.CitySavior.dto.member.request.MemberLoginV1Request;
 import GDSCKNU.CitySavior.dto.member.response.TokenResponse;
 import GDSCKNU.CitySavior.entity.member.Member;
 import GDSCKNU.CitySavior.entity.member.MemberRole;
+import GDSCKNU.CitySavior.entity.memberDetail.MemberDetailsImpl;
 import GDSCKNU.CitySavior.exception.MemberException;
 import GDSCKNU.CitySavior.exception.error.MemberError;
 import GDSCKNU.CitySavior.global.jwt.entity.NoPasswordAuthenticationToken;
@@ -114,6 +115,14 @@ public class AuthService {
         redisService.setValuesWithTimeout(requestAccessToken,
                 "logout",
                 expiration);
+    }
+
+    @Transactional
+    public void modifyRole(MemberDetailsImpl memberDetails) {
+        Member member = memberRepository.findByEmail(memberDetails.getUsername())
+                .orElseThrow(() -> new MemberException(MemberError.MEMBER_NOT_FOUND_ERROR));
+
+        member.toAdminRole();
     }
 
     /*
