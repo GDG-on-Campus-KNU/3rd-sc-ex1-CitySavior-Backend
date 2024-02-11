@@ -10,6 +10,7 @@ public class ReportDetailResponseConverter implements Converter<Report, ReportDe
 
         return ReportDetailResponse.builder()
                 .description(report.getDescription())
+                .img_url(report.getImg_url())
                 .reportDate(report.getReport_date())
                 .repairedDate(report.getRepaired_date())
                 .build();

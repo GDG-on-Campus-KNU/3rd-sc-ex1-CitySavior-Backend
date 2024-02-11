@@ -6,6 +6,7 @@ import GDSCKNU.CitySavior.dto.report.request.ReportRequest;
 import GDSCKNU.CitySavior.dto.report.response.MapReportsResponse;
 import GDSCKNU.CitySavior.dto.report.response.ReportDetailResponse;
 import GDSCKNU.CitySavior.dto.report.response.StatisticsResponse;
+import GDSCKNU.CitySavior.dto.reportComment.request.CreateReportCommentRequest;
 import GDSCKNU.CitySavior.entity.member.Member;
 import GDSCKNU.CitySavior.entity.memberDetail.MemberDetailsImpl;
 import GDSCKNU.CitySavior.service.ai.AIService;
@@ -18,10 +19,12 @@ import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -52,9 +55,8 @@ public class ReportsController {
     }
 
     @GetMapping("/reports/statistics")
-    public StatisticsResponse getStatistics(@RequestParam("latitude") double latitude,
-                                            @RequestParam("longitude") double longitude) {
-        return reportService.getStatistics(latitude, longitude);
+    public StatisticsResponse getStatistics() {
+        return reportService.getStatistics();
     }
 
     @PostMapping("/reports")
@@ -66,8 +68,12 @@ public class ReportsController {
         int damageRate = aiService.evaluateDamageRate(imgFiles);
         achievementMemberService.updateAchievementRecord(requestDto.category(), memberDetails);
         Member member = memberService.findMemberByEmail(memberDetails.getUsername());
-
         return reportService.saveReport(requestDto, damageRate, fileName, member);
+    }
+
+    @PostMapping("/reports/{report_id}/comments")
+    public Long addComment(@PathVariable("report_id") Long reportId, @RequestBody CreateReportCommentRequest content) {
+        return reportService.addComment(reportId, content.comment());
     }
 
     @PatchMapping("/reports/{report_id}/end")

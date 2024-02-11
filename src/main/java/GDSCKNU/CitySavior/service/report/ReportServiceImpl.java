@@ -49,8 +49,8 @@ public class ReportServiceImpl implements ReportService {
                 .member(member)
                 .build();
 
-        Report saveReport = reportRepository.save(report);
-        return saveReport.getReport_id();
+        reportRepository.save(report);
+        return report.getReport_id();
     }
 
     @Override
@@ -68,8 +68,8 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public Map getReportsByGIS(double latitude, double longitude, int radius) {
         List<Report> reports = reportRepository.findReportsWithinRadius(
-                geometryFactory.createPoint(
-                        new Coordinate(longitude, latitude)), radius);
+                geometryFactory.createPoint(new Coordinate(longitude, latitude)),
+                radius);
 
         List<MapReportsResponse> points = reports.stream()
                 .map(report -> conversionService.convert(report, MapReportsResponse.class))
@@ -106,7 +106,7 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public StatisticsResponse getStatistics(double latitude, double longitude) {
+    public StatisticsResponse getStatistics() {
         return new StatisticsResponse(reportRepository.findAll());
     }
 }

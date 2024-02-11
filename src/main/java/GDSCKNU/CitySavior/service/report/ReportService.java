@@ -20,5 +20,5 @@ public interface ReportService {
 
     Long addComment(Long reportId, String content);
 
-    StatisticsResponse getStatistics(double latitude, double longitude);
+    StatisticsResponse getStatistics();
 }
