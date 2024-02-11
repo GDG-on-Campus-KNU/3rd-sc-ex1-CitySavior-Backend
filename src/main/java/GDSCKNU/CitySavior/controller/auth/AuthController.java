@@ -5,6 +5,7 @@ import GDSCKNU.CitySavior.dto.member.request.MemberCreateV1Request;
 import GDSCKNU.CitySavior.dto.member.request.MemberLoginV1Request;
 import GDSCKNU.CitySavior.dto.member.response.TokenResponse;
 import GDSCKNU.CitySavior.dto.token.request.TokenReissueRequest;
+import GDSCKNU.CitySavior.entity.member.MemberRole;
 import GDSCKNU.CitySavior.entity.memberDetail.MemberDetailsImpl;
 import GDSCKNU.CitySavior.exception.success.AuthSuccess;
 import GDSCKNU.CitySavior.global.response.model.ApiResponse;
@@ -18,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -116,7 +118,15 @@ public class AuthController {
     )
     @PutMapping("/role")
     public void roleChange(@UserInfo MemberDetailsImpl memberDetails) {
-        System.out.println(memberDetails.getUsername() + memberDetails.getPassword());
         authService.modifyRole(memberDetails);
     }
+
+    @Operation(
+            summary = "권한 가져오기"
+    )
+    @GetMapping("/role")
+    public MemberRole findRole(@UserInfo MemberDetailsImpl memberDetails) {
+        return authService.getMemberRole(memberDetails);
+    }
+
 }

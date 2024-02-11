@@ -125,6 +125,11 @@ public class AuthService {
         member.toAdminRole();
     }
 
+    public MemberRole getMemberRole(MemberDetailsImpl memberDetails) {
+        Boolean isAdmin = memberRepository.findIsAdminByEmail(memberDetails.getUsername());
+        return MemberRole.getByIsAdmin(isAdmin);
+    }
+
     /*
     public String getAuthorities(Authentication authentication) {
         return authentication.getAuthorities().stream()
