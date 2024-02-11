@@ -52,4 +52,8 @@ public class Member {
         }
         return MemberRole.USER.name();
     }
+
+    public void toAdminRole() {
+        this.isAdmin = true;
+    }
 }
