@@ -60,6 +60,11 @@ springdoc:
     display-request-duration: true
     operations-sorter: alpha # Path 순으로 정렬
 
+ai:
+  server:
+    uri: http://34.64.113.114:5000
+    path: /predict
+
 ---
 
 spring:
@@ -119,3 +124,8 @@ springdoc:
     disable-swagger-default-url: true # default 경로 disable
     display-request-duration: true
     operations-sorter: alpha # Path 순으로 정렬
+
+ai:
+  server:
+    uri: http://34.64.113.114:5000
+    path: /predict
