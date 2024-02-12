@@ -1,5 +1,7 @@
 package GDSCKNU.CitySavior.service.ai;
 
+import GDSCKNU.CitySavior.exception.AIException;
+import GDSCKNU.CitySavior.exception.error.AIError;
 import java.util.concurrent.atomic.AtomicInteger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +24,6 @@ public class AIServiceImpl implements AIService {
 
     @Override
     public int evaluateDamageRate(MultipartFile imgFiles) {
-        //Todo: 사용자 정의 예외를 던져야 함
         AtomicInteger weight = new AtomicInteger();
 
         webClient.post()
@@ -33,7 +34,7 @@ public class AIServiceImpl implements AIService {
                 .subscribe(
                         weight::set,
                         throwable -> {
-                            throw new RuntimeException("AI 서버와 통신 중 오류가 발생했습니다.");
+                            throw new AIException(AIError.AI_SERVER_ERROR);
                         });
 
         return weight.get();
