@@ -1,16 +1,41 @@
 package GDSCKNU.CitySavior.service.ai;
 
-import GDSCKNU.CitySavior.service.ai.AIService;
-import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
+@RequiredArgsConstructor
 public class AIServiceImpl implements AIService {
+
+    private final WebClient webClient;
+
+    @Value("${ai.server.uri}")
+    private String aiServerUri;
+
+    @Value("${ai.server.path}")
+    private String aiServerPath;
+
 
     @Override
     public int evaluateDamageRate(MultipartFile imgFiles) {
-        //Todo: AI 모델을 통해 이미지를 분석하여 피해 정도를 반환해야 함
-        return new Random().nextInt(10);
+        //Todo: 사용자 정의 예외를 던져야 함
+        AtomicInteger weight = new AtomicInteger();
+
+        webClient.post()
+                .uri(aiServerUri + aiServerPath)
+                .bodyValue(imgFiles)
+                .retrieve()
+                .bodyToMono(Integer.class)
+                .subscribe(
+                        weight::set,
+                        throwable -> {
+                            throw new RuntimeException("AI 서버와 통신 중 오류가 발생했습니다.");
+                        });
+
+        return weight.get();
     }
 }
