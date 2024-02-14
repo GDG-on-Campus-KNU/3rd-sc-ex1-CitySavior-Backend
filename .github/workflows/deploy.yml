@@ -31,7 +31,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: build gradlew
-        run: ./gradlew build
+        run: ./gradlew clean build -x test
 
       - name: build docker image and push to docker hub
         run: |
