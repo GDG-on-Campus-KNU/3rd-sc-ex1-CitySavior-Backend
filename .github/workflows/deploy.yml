@@ -50,6 +50,9 @@ jobs:
           target: "/home/ubuntu/"
           command: |
             sudo chmod +w /home/ubuntu/
+            sudo chmod +x /home/ubuntu/scripts/deploy.sh
+            sudo /home/ubuntu/scripts/deploy.sh
+
 
       - name: ✔️ send docker-compose.yml to EC2 server
         uses: appleboy/scp-action@master
@@ -62,6 +65,8 @@ jobs:
           target: "/home/ubuntu/"
           command: |
             sudo chmod +w /home/ubuntu/
+            sudo chmod +x /home/ubuntu/docker-compose.yml
+            sudo /home/ubuntu/docker-compose.yml
 
   cd:
     needs: ci
