@@ -45,6 +45,7 @@ jobs:
           username: ${{ secrets.GCP_SSH_USERNAME }}
           host: ${{ secrets.GCP_SSH_HOST }}
           key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
+          port: ${{ secrets.GCP_SSH_PORT }}
           source: "./scripts/deploy.sh"
           target: "/home/ubuntu/"
           command: |
