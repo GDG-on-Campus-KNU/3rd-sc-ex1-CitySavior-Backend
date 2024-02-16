@@ -50,6 +50,7 @@ jobs:
           target: "/home/ubuntu/"
           command: |
             sudo chmod +w /home/ubuntu/
+            sudo chmod +x ./scripts/deploy.sh
             sudo chmod +x /home/ubuntu/scripts/deploy.sh
             sudo /home/ubuntu/scripts/deploy.sh
 
