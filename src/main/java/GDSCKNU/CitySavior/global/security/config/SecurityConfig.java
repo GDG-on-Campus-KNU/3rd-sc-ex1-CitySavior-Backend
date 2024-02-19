@@ -1,9 +1,7 @@
 package GDSCKNU.CitySavior.global.security.config;
 
-import GDSCKNU.CitySavior.global.jwt.filter.JwtAuthenticationEntryPoint;
 import GDSCKNU.CitySavior.global.jwt.filter.JwtAuthenticationFilter;
 import GDSCKNU.CitySavior.global.jwt.filter.NoPasswordAuthenticationFilter;
-import GDSCKNU.CitySavior.global.jwt.handler.JwtAccessDeniedHandler;
 import GDSCKNU.CitySavior.global.jwt.provider.JwtTokenProvider;
 import GDSCKNU.CitySavior.global.jwt.provider.NoPasswordAuthenticationProvider;
 import GDSCKNU.CitySavior.service.member.detail.MemberDetailServiceImpl;
@@ -31,8 +29,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig {
 
     private final JwtTokenProvider jwtTokenProvider;
-    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
-    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     private final MemberDetailServiceImpl memberDetailService;
 
@@ -52,11 +48,6 @@ public class SecurityConfig {
                         UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(
                         (sessionManagement) -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-
-                .exceptionHandling((exceptionHandling) ->
-                        exceptionHandling
-                                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                                .accessDeniedHandler(jwtAccessDeniedHandler))
 
                 .headers((headers) -> headers.frameOptions(FrameOptionsConfig::sameOrigin));
 
