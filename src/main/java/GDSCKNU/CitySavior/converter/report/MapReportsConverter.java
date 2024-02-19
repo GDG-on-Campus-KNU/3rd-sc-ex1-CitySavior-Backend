@@ -11,8 +11,8 @@ public class MapReportsConverter implements Converter<Report, MapReportsResponse
     public MapReportsResponse convert(Report reports) {
         return MapReportsResponse.builder()
                 .reportId(reports.getReport_id())
-                .latitude(reports.getLocation().getX())
-                .longitude(reports.getLocation().getY())
+                .latitude(reports.getLocation().getY())
+                .longitude(reports.getLocation().getX())
                 .category(reports.getCategory())
                 .weight(reports.getWeight())
                 .build();
