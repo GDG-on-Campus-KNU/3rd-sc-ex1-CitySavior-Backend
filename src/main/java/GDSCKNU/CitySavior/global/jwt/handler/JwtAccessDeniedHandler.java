@@ -15,6 +15,6 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
     public void handle(HttpServletRequest request, HttpServletResponse response,
                        AccessDeniedException accessDeniedException) throws IOException, ServletException {
         response.setCharacterEncoding("utf-8");
-        response.sendError(403, "접근 가능한 권한이 아닙니다.");
+        response.sendError(401, "접근 가능한 권한이 아닙니다.");
     }
 }

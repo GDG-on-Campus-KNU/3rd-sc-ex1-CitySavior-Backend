@@ -8,12 +8,12 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum JwtError implements ErrorEnumBase {
 
-    INVALID_JWT_SIGNATURE(HttpStatus.NOT_ACCEPTABLE, "유효하지 않은 JWT signature 입니다."),
-    INVALID_JWT_TOKEN(HttpStatus.NOT_ACCEPTABLE, "유효하지 않은 Token 입니다,"),
-    EXPIRED_JWT_TOKEN(HttpStatus.NOT_ACCEPTABLE, "만료된 Token 입니다."),
-    UNSUPPORTED_JWT_TOKEN(HttpStatus.NOT_ACCEPTABLE, "지원하지 않는 Token 입니다."),
-    EMPTY_JWT_CLAIM_TOKEN(HttpStatus.NOT_ACCEPTABLE, "Jwt Claim이 비어있습니다."),
-    EMPTY_JWT_TOKEN(HttpStatus.NOT_ACCEPTABLE, "Jwt Token이 비어있습니다.");
+    INVALID_JWT_SIGNATURE(HttpStatus.UNAUTHORIZED, "유효하지 않은 JWT signature 입니다."),
+    INVALID_JWT_TOKEN(HttpStatus.UNAUTHORIZED, "유효하지 않은 Token 입니다,"),
+    EXPIRED_JWT_TOKEN(HttpStatus.UNAUTHORIZED, "만료된 Token 입니다."),
+    UNSUPPORTED_JWT_TOKEN(HttpStatus.UNAUTHORIZED, "지원하지 않는 Token 입니다."),
+    EMPTY_JWT_CLAIM_TOKEN(HttpStatus.UNAUTHORIZED, "Jwt Claim이 비어있습니다."),
+    EMPTY_JWT_TOKEN(HttpStatus.UNAUTHORIZED, "Jwt Token이 비어있습니다.");
 
     final HttpStatus httpStatus;
     final String message;
