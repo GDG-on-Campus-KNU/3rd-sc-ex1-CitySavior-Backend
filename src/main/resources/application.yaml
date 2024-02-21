@@ -9,6 +9,11 @@ spring:
     activate:
       on-profile: blue
 
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+
   datasource:
     url: jdbc:postgresql://34.64.74.170:5432/citysavior
     username: postgres
@@ -72,6 +77,10 @@ spring:
     activate:
       on-profile: green
 
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
   datasource:
     url: jdbc:postgresql://34.64.74.170:5432/citysavior
     username: postgres
