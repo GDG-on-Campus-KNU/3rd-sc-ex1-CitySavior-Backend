@@ -8,6 +8,8 @@ import GDSCKNU.CitySavior.dto.report.response.StatisticsResponse;
 import GDSCKNU.CitySavior.entity.member.Member;
 import GDSCKNU.CitySavior.entity.report.Report;
 import GDSCKNU.CitySavior.entity.reportComment.ReportComment;
+import GDSCKNU.CitySavior.exception.ReportException;
+import GDSCKNU.CitySavior.exception.error.ReportError;
 import GDSCKNU.CitySavior.repository.reportComment.ReportCommentRepository;
 import GDSCKNU.CitySavior.repository.report.ReportRepository;
 import jakarta.transaction.Transactional;
@@ -56,7 +58,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public ReportDetailResponse getReportDetail(Long reportId) {
         Report findReport = reportRepository.findById(reportId)
-                .orElseThrow(() -> new IllegalArgumentException("해당하는 신고가 없습니다."));
+                .orElseThrow(() -> new ReportException(ReportError.REPORT_NOT_FOUND_ERROR));
 
         ReportDetailResponse responseDto = conversionService.convert(findReport, ReportDetailResponse.class);
         List commentDtos = conversionService.convert(findReport.getComments(), List.class);
@@ -82,7 +84,7 @@ public class ReportServiceImpl implements ReportService {
     @Transactional
     public void endReport(Long reportId) {
         Report findReport = reportRepository.findById(reportId)
-                .orElseThrow(() -> new IllegalArgumentException("해당하는 신고가 없습니다."));
+                .orElseThrow(() -> new ReportException(ReportError.REPORT_NOT_FOUND_ERROR));
 
         findReport.endReport();
     }
@@ -91,7 +93,7 @@ public class ReportServiceImpl implements ReportService {
     @Transactional
     public Long addComment(Long reportId, String content) {
         Report findReport = reportRepository.findById(reportId)
-                .orElseThrow(() -> new IllegalArgumentException("해당하는 신고가 없습니다."));
+                .orElseThrow(() -> new ReportException(ReportError.REPORT_NOT_FOUND_ERROR));
 
         ReportComment reportComment = ReportComment.builder()
                 .create_date(LocalDate.now())
