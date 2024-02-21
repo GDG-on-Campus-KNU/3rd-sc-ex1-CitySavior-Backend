@@ -11,7 +11,6 @@
 
 </div>
 
----
 <div align="center">
 
 ### This app lets users report and manage issues on a map, using AI to assess damage and contribute to urban sustainability.
@@ -20,21 +19,20 @@
 
 
 
-1️⃣ [Introduction](#👋-Introduction)
+1️⃣ [Introduction](#👋-introduction)
 
-2️⃣ [Repository](#📁-Repository)
+2️⃣ [Repository](#📁-repository)
 
-3️⃣ [Installation](#🧰-Installation)
+3️⃣ [Installation](#🧰-installation)
 
-4️⃣ [Contributors](#🤝-Contributors)
+4️⃣ [Contributors](#🤝-contributors)
 
-5️⃣ [Technologies](#⚙️-Technologies)
+5️⃣ [Technologies](#⚙️-technologies)
 
-6️⃣ [Images](#📷-Images)
+6️⃣ [Images](#📷-images)
 
 # 👋 Introduction
 
----
 > This app offers users the capability to report issues via a map interface,
 > which administrators can then manage and mark as completed.
 > Leveraging AI technology, it assesses the extent of damage reported.
@@ -44,7 +42,6 @@
 
 # 📁 Repository
 
----
 [📱 Android Repository](https://github.com/GDSC-KNU/3rd-sc-ex1-CitySavior-Android)
 <br>
 [🌐 Backend Repository](https://github.com/GDSC-KNU/3rd-sc-ex1-CitySavior-Backend)
@@ -53,7 +50,6 @@
 
 # 🧰 Installation
 
----
 
 ## Android
 
@@ -92,17 +88,8 @@
 - ㅁㄴㅇㅁㄴㅇ
 
 
-# 🤝 Contributors
-
----
-[<img src="https://github.com/bayy1216.png" width="100px">](https://github.com/bayy1216)
-[<img src="https://github.com/jinchiim.png" width="100px">](https://github.com/jinchiim)
-[<img src="https://github.com/sami355-24.png" width="100px">](https://github.com/sami355-24)
-[<img src="https://github.com/Bosung-Baek" width="100px">](https://github.com/Bosung-Baek)
-
 # ⚙️ Technologies
 
----
 - Android
 - Google Maps API
 - GCP
@@ -111,14 +98,17 @@
 
 # 📷 Images
 
----
 
 |       **OnBoarding Page**               |                                                          **Home Page**                                                           |  **Map Page**   |
 |:----------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------:|:---------------:|
 |![1_onboarding](https://github.com/GDSC-KNU/3rd-sc-ex1-CitySavior-Backend/assets/72246411/330c861a-ca18-48e1-90c3-8dae98bfc482)|    ![2_home](https://github.com/GDSC-KNU/3rd-sc-ex1-CitySavior-Backend/assets/72246411/6df71f62-f30a-4ffb-ba31-60492e44c9f5)     |       ![3_map](https://github.com/GDSC-KNU/3rd-sc-ex1-CitySavior-Backend/assets/72246411/b73d1285-c212-455f-a875-deb09a8c9a11)           |
 |         **Create Repory Page**      |                                                      **Report Deail Page**                                                       | **Profil Page** |
 |![5_create_report](https://github.com/GDSC-KNU/3rd-sc-ex1-CitySavior-Backend/assets/72246411/d5c6bc34-5bc3-4d2e-b733-af911778fdf9)|![6_report_detail](https://github.com/GDSC-KNU/3rd-sc-ex1-CitySavior-Backend/assets/72246411/17aae4fd-25d4-4235-9bdd-e4e333ce09db)|![7_profile](https://github.com/GDSC-KNU/3rd-sc-ex1-CitySavior-Backend/assets/72246411/4eea95af-4fca-4992-8aea-332a4dc1b27d)
-|
 
 
----
+# 🤝 Contributors
+
+[<img src="https://github.com/bayy1216.png" width="100px">](https://github.com/bayy1216)
+[<img src="https://github.com/jinchiim.png" width="100px">](https://github.com/jinchiim)
+[<img src="https://github.com/sami355-24.png" width="100px">](https://github.com/sami355-24)
+[<img src="https://github.com/Bosung-Baek" width="100px">](https://github.com/Bosung-Baek)
