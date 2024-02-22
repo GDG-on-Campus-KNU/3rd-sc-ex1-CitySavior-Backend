@@ -85,7 +85,34 @@
     - Run `CitySaviorApplication`
 
 ## AI
-- ㅁㄴㅇㅁㄴㅇ
+- Requirements 
+  - Python = 3.8.8 
+  - Anaconda 
+  - tensorflow = 2.10.0 
+  - flask = 3.0.0 
+  - numpy =1.25.2 
+  - Pillow
+- RUN
+  - Go to your directory where to run 
+  - Clone the repository from github
+    ```bash
+    git git clone https://github.com/GDSC-KNU/3rd-sc-ex1-CitySavior-AI.git
+    ```
+  - Init conda virtual environment with python 3.8.8 version, install all the requirements mentioned above
+  - Activate your environment, and Run `server.py` in directory with
+    ```bash
+    python server.py
+    ```
+- Run in background
+  - If you want to run server in background, you can use this command
+    ```bash
+    nohup python -u server.py &
+    ```
+  - If you want to observe the code running, you can put this command in your prompt
+    ```bash
+    tail -f nohup.out
+    ```
+
 
 
 # ⚙️ Technologies
